@@ -66,8 +66,8 @@
                                             <div class="image img-cir img-120">
                                                 <img src="{{asset('admin_assets/images/icon/avatar-big-01.jpg')}}" alt="John Doe" />
                                             </div>
-                                            <h4 class="name">john doe</h4>
-                                            <a href="#">Sign out</a>
+                                            <h4 class="name">Admin</h4>
+                                            <a href="logout">Sign out</a>
                                         </div>
                                         
                                         <div class="account-dropdown__body d-md-none">
@@ -185,12 +185,17 @@
                                     </li>
                                 </ul>
                             </li>
+                            
                             <li>
-                                <a href="inbox.html">
-                                    <i class="fas fa-chart-bar"></i>Inbox</a>
+                                <a href="dashboard">
+                                    <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                                <!-- <span class="inbox-num">3</span> -->
+                            </li>
+                            <li>
+                                <a href="category">
+                                    <i class="fas fa-chart-bar"></i>Category</a>
                                 <span class="inbox-num">3</span>
                             </li>
-                            
                         </ul>
                     </nav>
                 </div>

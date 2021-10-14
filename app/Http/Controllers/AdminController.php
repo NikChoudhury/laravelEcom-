@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -14,7 +15,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin/Login');
+        if (session()->has('ADMIN_LOGIN') && session()->has('ADMIN_id')) {
+            return redirect('admin/dashboard');
+        }else{
+            return view('admin/Login');
+        }
     }
 
     public function auth(Request $request){
@@ -32,11 +37,17 @@ class AdminController extends Controller
         $email= $request->post('email');
         $password= $request->post('password');
 
-        $result = Admin::where(['email'=>$email,'password'=>$password])->get();
-        if (isset($result[0]->id)) {
-            $request->session()->put("ADMIN_LOGIN",true);
-            $request->session()->put("ADMIN_id",$result[0]->id);
-            return redirect('admin/dashboard');
+        // $result = Admin::where(['email'=>$email,'password'=>$password])->get();
+        $result = Admin::where(['email'=>$email])->first();
+        if ($result) {
+            if (Hash::check($password, $result->password)) {
+                $request->session()->put("ADMIN_LOGIN",true);
+                $request->session()->put("ADMIN_id",$result->id);
+                return redirect('admin/dashboard');
+            }else{
+                $request->session()->flash('error',"Your email or password is incorrect !!");
+                return redirect('admin')->withInput($request->only('email'));
+            }         
         }else{
             $request->session()->flash('error',"Your email or password is incorrect !!");
             return redirect('admin')->withInput($request->only('email'));
@@ -46,4 +57,18 @@ class AdminController extends Controller
     public function dashboard(){
         return view('admin.dashboard');
     }
+
+    public function logout(){
+        session()->forget('ADMIN_LOGIN');
+        session()->forget('ADMIN_id');
+        session()->flash('success',"Logout Successfull !!");
+        return redirect('admin');
+    }
+
+    // public function updatePassword()
+    // {
+    //     $result=Admin::find(1);
+    //     $result->password=Hash::make("CN5852724807#");
+    //     $result->save();
+    // }
 }
