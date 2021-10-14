@@ -8,3 +8,7 @@
     - For Making Admin Model and controller and migration
 4. php artisan migrate
     - For Creating admins table
+5. php artisan make:middleware AdminAuth
+    - For Creating Admin Auth Middleware
+6. php artisan make:model Category -mcr
+    - For Making Category Model and controller and migration

@@ -36,6 +36,8 @@
                             <a href="#">
                                 <img src="{{asset('admin_assets/images/icon/logo.png')}}" alt="CoolAdmin">
                             </a>
+                            <br>
+                            {{Config::get('contants.SITE_NAME')}}
                         </div>
                         <div class="login-form">
                             <form action="{{route('admin.auth')}}" method="post" name="login" id="admin-login">
@@ -70,6 +72,11 @@
                             @if(session('error'))
                             <div class="alert alert-danger" role="alert">
                                 {{session('error')}}
+                            </div>
+                            @endif
+                            @if(session('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{session('success')}}
                             </div>
                             @endif
                             <div class="register-link">
