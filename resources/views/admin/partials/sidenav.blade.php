@@ -47,7 +47,7 @@
                             <!-- <span class="inbox-num">3</span> -->
                         </li>
                         <li>
-                            <a href="category">
+                            <a href="{{url('admin/category')}}">
                                 <i class="fas fa-chart-bar"></i>Category</a>
                             <span class="inbox-num">3</span>
                         </li>

@@ -15,6 +15,11 @@ Route::post('admin/auth', [AdminController::class,'auth'])->name('admin.auth');
 Route::middleware(['admin_auth'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class,'dashboard']);
     Route::get('admin/logout', [AdminController::class,'logout']);
+    // Category
     Route::get('admin/category', [CategoryController::class,'index']);
-    Route::get('admin/manage_category', [CategoryController::class,'manageCategory']);
+    Route::get('admin/category/manage_category', [CategoryController::class,'manageCategory']);
+    Route::get('admin/category/manage_category/{id}', [CategoryController::class,'manageCategory']);
+    Route::post('admin/category/manage_category_process', [CategoryController::class,'manage_category_process'])->name('category.insert');
+    Route::get('admin/category/remove/{id}', [CategoryController::class,'removeCategory']);
+    // END Category
 });

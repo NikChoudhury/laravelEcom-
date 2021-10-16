@@ -18,12 +18,11 @@
    
     <link href="{{asset('admin_assets/vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
     <link href="{{asset('admin_assets/vendor/slick/slick.css')}}" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="{{asset('admin_assets/vendor/toastr/toastr.min.css')}}">
     @stack('style-lib')
-    @stack('style')
     <!-- Main CSS-->
     <link href="{{asset('admin_assets/css/theme.css')}}" rel="stylesheet" media="all">
-   
-
+    @stack('style')
 </head>
 
 <body>
@@ -36,11 +35,12 @@
 
     <script src="{{asset('admin_assets/vendor/slick/slick.min.js')}}"></script>
     <script src="{{asset('admin_assets/vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
+    <script src="{{asset('admin_assets/vendor/toastr/toastr.min.js')}}"></script>
     @stack('script-lib')
     
-    @stack('script')
     <!-- Main JS-->
     <script src="{{asset('admin_assets/js/main.js')}}"></script>
+    @stack('script')
 </body>
 
 </html>

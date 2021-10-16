@@ -14,76 +14,54 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin/category/category');
+        $result['data']= Category::where('status','!=','-1')->orderBy('created_at', 'desc')->get();
+        return view('admin/category/category',$result);
     }
 
     public function manageCategory()
     {
         return view('admin/category/manage_category');
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    
+    public function manage_category_process(Request $request)
     {
-        //
+        $request->validate([
+            'category_name'=>'required',
+            'category_slug'=>'required|unique:categories',
+            'category_status'=>'required'
+        ],
+        [
+            'category_name.required'=>'Please Insert Category Name !!',
+            'category_slug.required'=>'Please Insert Category Slug !!',
+            'category_slug.unique'=>'Category Slug should be Unique!!',
+            'category_status.required'=>'Please Select Category Status !!'
+        ]);
+
+        $model= new Category();
+        $model->category_name=$request->post('category_name');
+        $model->category_slug=$request->post('category_slug');
+        $model->status=$request->post('category_status');
+        if ($model->save()) {
+            $request->session()->flash('message','Category successfully Inserted ☺');
+            return redirect(url('admin/category/manage_category'));
+        }else{
+            return withInput();
+        }
+                
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function removeCategory(Request $request,$id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Category $category)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Category $category)
-    {
-        //
+        $model= Category::where('status','!=','-1')->find($id);
+        // $model = Category::find($id);
+        if ($model) {
+            $model->status = "-1";
+            $model->delete();
+            $request->session()->flash('message','Category Deleted Successfully');
+            return redirect(url('admin/category'));
+        }else{
+            $request->session()->flash('error','Data Not Found !!!');
+            return redirect(url('admin/category'));
+        }
     }
 }

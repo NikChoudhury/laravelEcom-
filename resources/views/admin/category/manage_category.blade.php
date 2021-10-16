@@ -1,7 +1,12 @@
 @extends('admin.layouts.app')
-@section("title","Dashboard")
+@section("title","Manage Category")
 @push('style-lib')
-<link href="{{asset('admin_assets/vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all">
+<!-- <link href="{{asset('admin_assets/vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all"> -->
+@endpush
+@push('style')
+<style>
+        #category_manage_form .error{color:red;margin-top: 5px;}
+    </style>
 @endpush
 @section('panel')
     <!-- BREADCRUMB-->
@@ -15,7 +20,7 @@
                                     
                                     <ul class="list-unstyled list-inline au-breadcrumb__list">
                                         <li class="list-inline-item active">
-                                            <a href="category">Category</a>
+                                            <a href="{{url('admin/category')}}">Category</a>
                                         </li>
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
@@ -24,7 +29,7 @@
                                     </ul>
                                 </div>
                                 <h1 class="mb-2">Manage Category</h1>
-                                <a href="category" class="au-btn au-btn-icon au-btn--green">Back</button></a>
+                                <a href="{{url('admin/category')}}" class="au-btn au-btn-icon au-btn--green">Back</button></a>
                             </div>
                         </div>
                     </div>
@@ -41,56 +46,44 @@
                     <div class="col-md-8 offset-md-2">
                         <!-- Card Start -->
                         <div class="card">
-                            <div class="card-header">Credit Card</div>
                             <div class="card-body">
-                                <div class="card-title">
-                                    <h3 class="text-center title-2">Pay Invoice</h3>
-                                </div>
-                                <hr>
-                                <form action="" method="post" novalidate="novalidate">
+                                <form action="{{route('category.insert')}}" method="post" name="category_manage_form" id="category_manage_form">
+                                    @csrf
                                     <div class="form-group">
-                                        <label for="cc-payment" class="control-label mb-1">Payment amount</label>
-                                        <input id="cc-pament" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="100.00">
-                                    </div>
-                                    <div class="form-group has-success">
-                                        <label for="cc-name" class="control-label mb-1">Name on card</label>
-                                        <input id="cc-name" name="cc-name" type="text" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card"
-                                            autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
-                                        <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                        <label for="category_name" class="control-label mb-1">Category Name</label>
+                                        <input id="category_name" name="category_name" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('category_name')}}">
+                                        @if($errors->has('category_name'))
+                                            <p class="text-danger mt-2">{{ $errors->first('category_name') }}</p>
+                                        @endif
                                     </div>
                                     <div class="form-group">
-                                        <label for="cc-number" class="control-label mb-1">Card number</label>
-                                        <input id="cc-number" name="cc-number" type="tel" class="form-control cc-number identified visa" value="" data-val="true"
-                                            data-val-required="Please enter the card number" data-val-cc-number="Please enter a valid card number"
-                                            autocomplete="cc-number">
-                                        <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+                                        <label for="category_slug" class="control-label mb-1">Category Slug</label>
+                                        <input id="category_slug" name="category_slug" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('category_slug')}}">
+                                        @if($errors->has('category_slug'))
+                                            <p class="text-danger mt-2">{{ $errors->first('category_slug') }}</p>
+                                        @endif
                                     </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="cc-exp" class="control-label mb-1">Expiration</label>
-                                                <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration"
-                                                    data-val-cc-exp="Please enter a valid month and year" placeholder="MM / YY"
-                                                    autocomplete="cc-exp">
-                                                <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="x_card_code" class="control-label mb-1">Security code</label>
-                                            <div class="input-group">
-                                                <input id="x_card_code" name="x_card_code" type="tel" class="form-control cc-cvc" value="" data-val="true" data-val-required="Please enter the security code"
-                                                    data-val-cc-cvc="Please enter a valid security code" autocomplete="off">
-
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="form-group">
+                                        <label for="category_status" class="control-label mb-1">Status</label>
+                                        <select name="category_status" id="category_status" class="form-control">
+                                            <option value="1" @if (old('category_status') == "1") {{ 'selected' }} @endif >Active</option>
+                                            <option value="0" @if (old('category_status') == "0") {{ 'selected' }} @endif>Deactive</option>
+                                        </select>
+                                        @if($errors->has('category_status'))
+                                            <p class="text-danger mt-2">{{ $errors->first('category_status') }}</p>
+                                        @endif
+                                    </div>          
                                     <div>
-                                        <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                            <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                            <span id="payment-button-amount">Pay $100.00</span>
-                                            <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                        <button id="save-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                            <span id="save-button-amount">Save</span>
+                                            <span id="save-button-sending" style="display:none;">Sending…</span>
                                         </button>
                                     </div>
+                                    @if(session('message'))
+                                        <div class="alert alert-success mt-2" role="alert">
+                                            {{session('message')}}
+                                        </div>
+                                    @endif
                                 </form>
                             </div>
                         </div>
@@ -100,8 +93,44 @@
             </div>
         </div>    
     </section>
-    <!-- END Categoru-->  
+    <!-- END Category-->  
     
    
 
 @endsection
+@push('script-lib')
+<script src="{{asset('admin_assets/js/jquery.validate.min.js')}}"></script>
+@endpush
+
+@push('script')
+<script>
+        $(function(){
+            $("form[name='category_manage_form']").validate({
+                rules:{
+                    category_name:{
+                        required:true,
+                        minlength:2
+                    },
+                    category_slug:{
+                        required:true,
+                        minlength:2
+                    },
+                    category_status:{
+                        required:true,
+                    }
+                },
+                messages:{
+                    category_name: {
+                        required: "Please Insert Category Name !!",
+                        minlength: "Atleast 2 character required !!"
+                    },
+                    category_slug: {
+                        required: "Please Insert Category Slug !!",
+                        minlength: "Atleast 2 character required !!"
+                    },
+                    category_status: "Please Select Category Status !!!"
+                }
+            });
+        });
+    </script>
+@endpush

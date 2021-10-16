@@ -1,5 +1,5 @@
  <!-- FOOTER -->
- <section class="m-t-75">
+ <footer>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -9,5 +9,5 @@
                 </div>
             </div>
         </div>
-</section>
+</footer>
 <!-- END FOOTER -->
