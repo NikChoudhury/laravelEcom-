@@ -67,7 +67,7 @@
                                                 <img src="{{asset('admin_assets/images/icon/avatar-big-01.jpg')}}" alt="John Doe" />
                                             </div>
                                             <h4 class="name">Admin</h4>
-                                            <a href="logout">Sign out</a>
+                                            <a href="{{url('admin/logout')}}">Sign out</a>
                                         </div>
                                         
                                         <div class="account-dropdown__body d-md-none">
@@ -187,7 +187,7 @@
                             </li>
                             
                             <li>
-                                <a href="dashboard">
+                                <a href="{{url('admin/dashboard')}}">
                                     <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                                 <!-- <span class="inbox-num">3</span> -->
                             </li>

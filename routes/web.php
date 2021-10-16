@@ -19,7 +19,7 @@ Route::middleware(['admin_auth'])->group(function () {
     Route::get('admin/category', [CategoryController::class,'index']);
     Route::get('admin/category/manage_category', [CategoryController::class,'manageCategory']);
     Route::get('admin/category/manage_category/{id}', [CategoryController::class,'manageCategory']);
-    Route::post('admin/category/manage_category_process', [CategoryController::class,'manage_category_process'])->name('category.insert');
+    Route::post('admin/category/manage_category_process', [CategoryController::class,'manage_category_process'])->name('category.manage_category_process');
     Route::get('admin/category/remove/{id}', [CategoryController::class,'removeCategory']);
     // END Category
 });

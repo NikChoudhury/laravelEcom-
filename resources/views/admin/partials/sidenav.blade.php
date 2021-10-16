@@ -42,7 +42,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="dashboard">
+                            <a href="{{url('admin/dashboard')}}">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                             <!-- <span class="inbox-num">3</span> -->
                         </li>

@@ -18,16 +18,34 @@ class CategoryController extends Controller
         return view('admin/category/category',$result);
     }
 
-    public function manageCategory()
+    public function manageCategory(Request $request,$id='')
     {
-        return view('admin/category/manage_category');
+        if ($id>0) {
+            $model = Category::where(['id'=>$id])->get();
+            if (!$model->isEmpty()) {
+                $data['id']=$model['0']->id;
+                $data['category_name']=$model['0']->category_name;
+                $data['category_slug']=$model['0']->category_slug;
+                $data['category_status']=$model['0']->status;
+            }else {
+                $request->session()->flash('error','Data Not Found !!!');
+                return redirect(url('admin/category'));
+            }
+           
+        }else {
+            $data['id']='0';
+            $data['category_name']='';
+            $data['category_slug']='';
+            $data['category_status']='';
+        }
+        return view('admin/category/manage_category',$data);
     }
     
     public function manage_category_process(Request $request)
     {
         $request->validate([
             'category_name'=>'required',
-            'category_slug'=>'required|unique:categories',
+            'category_slug'=>'required|unique:categories,category_slug,'.$request->post('id'),
             'category_status'=>'required'
         ],
         [
@@ -37,13 +55,20 @@ class CategoryController extends Controller
             'category_status.required'=>'Please Select Category Status !!'
         ]);
 
-        $model= new Category();
+        if ($request->post('id')>0) {
+            $model = Category::find($request->post('id'));
+            $msg = "Category successfully Updated ☺";
+        }else {
+            $model= new Category();
+            $msg = "Category successfully Inserted ☺";
+        }
+        
         $model->category_name=$request->post('category_name');
         $model->category_slug=$request->post('category_slug');
         $model->status=$request->post('category_status');
         if ($model->save()) {
-            $request->session()->flash('message','Category successfully Inserted ☺');
-            return redirect(url('admin/category/manage_category'));
+            $request->session()->flash('message',$msg);
+            return redirect(url('admin/category'));
         }else{
             return withInput();
         }

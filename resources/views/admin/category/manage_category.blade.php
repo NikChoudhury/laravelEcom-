@@ -20,7 +20,7 @@
                                     
                                     <ul class="list-unstyled list-inline au-breadcrumb__list">
                                         <li class="list-inline-item active">
-                                            <a href="{{url('admin/category')}}">Category</a>
+                                            <a href="admin/category">Category</a>
                                         </li>
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
@@ -47,18 +47,18 @@
                         <!-- Card Start -->
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{route('category.insert')}}" method="post" name="category_manage_form" id="category_manage_form">
+                                <form action="{{route('category.manage_category_process')}}" method="post" name="category_manage_form" id="category_manage_form">
                                     @csrf
                                     <div class="form-group">
                                         <label for="category_name" class="control-label mb-1">Category Name</label>
-                                        <input id="category_name" name="category_name" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('category_name')}}">
+                                        <input id="category_name" name="category_name" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('category_name',$category_name)}}">
                                         @if($errors->has('category_name'))
                                             <p class="text-danger mt-2">{{ $errors->first('category_name') }}</p>
                                         @endif
                                     </div>
                                     <div class="form-group">
                                         <label for="category_slug" class="control-label mb-1">Category Slug</label>
-                                        <input id="category_slug" name="category_slug" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('category_slug')}}">
+                                        <input id="category_slug" name="category_slug" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('category_slug',$category_slug)}}">
                                         @if($errors->has('category_slug'))
                                             <p class="text-danger mt-2">{{ $errors->first('category_slug') }}</p>
                                         @endif
@@ -66,13 +66,14 @@
                                     <div class="form-group">
                                         <label for="category_status" class="control-label mb-1">Status</label>
                                         <select name="category_status" id="category_status" class="form-control">
-                                            <option value="1" @if (old('category_status') == "1") {{ 'selected' }} @endif >Active</option>
-                                            <option value="0" @if (old('category_status') == "0") {{ 'selected' }} @endif>Deactive</option>
+                                            <option value="1" @if (old('category_status',$category_status) == "1") {{ 'selected' }} @endif >Active</option>
+                                            <option value="0" @if (old('category_status',$category_status) == "0") {{ 'selected' }} @endif>Deactive</option>
                                         </select>
                                         @if($errors->has('category_status'))
                                             <p class="text-danger mt-2">{{ $errors->first('category_status') }}</p>
                                         @endif
-                                    </div>          
+                                    </div>
+                                    <input type="hidden" name="id" value="{{$id}}">       
                                     <div>
                                         <button id="save-button" type="submit" class="btn btn-lg btn-info btn-block">
                                             <span id="save-button-amount">Save</span>
