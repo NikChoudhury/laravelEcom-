@@ -12,3 +12,5 @@
     - For Creating Admin Auth Middleware
 6. php artisan make:model Category -mcr
     - For Making Category Model and controller and migration
+7. php artisan migrate --path=/database/migrations/2021_10_12_063339_create_categories_table.php
+   -For create category table

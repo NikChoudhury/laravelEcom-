@@ -15,6 +15,12 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('category_name');
+            $table->string('category_slug');
+            $table->enum('status',[-1,0,1])
+                    ->default(0)
+                    ->nullable()
+                    ->comment("-1=>'deleted',0='deactive',1='active'");
             $table->timestamps();
         });
     }

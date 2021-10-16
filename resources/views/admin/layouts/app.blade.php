@@ -7,7 +7,7 @@
         <div class="page-container2">
             @include('admin.partials.topnav')
                     @yield('panel')
-            @include('admin.partials.footer')    
+            @include('admin.partials.footer')   
         </div>
         <!-- PAGE CONTAINER END-->
     </div>
