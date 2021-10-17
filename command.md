@@ -14,3 +14,7 @@
     - For Making Category Model and controller and migration
 7. php artisan migrate --path=/database/migrations/2021_10_12_063339_create_categories_table.php
    -For create category table
+8. php artisan make:model Coupon -mcr
+    - For Making Coupon Model and controller and migration
+9. php artisan migrate
+    - For Creating Coupan table

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 Use App\Http\Controllers\AdminController;
 Use App\Http\Controllers\CategoryController;
-
+Use App\Http\Controllers\CouponController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,4 +22,11 @@ Route::middleware(['admin_auth'])->group(function () {
     Route::post('admin/category/manage_category_process', [CategoryController::class,'manage_category_process'])->name('category.manage_category_process');
     Route::get('admin/category/remove/{id}', [CategoryController::class,'removeCategory']);
     // END Category
+    // Coupon
+    Route::get('admin/coupon', [CouponController::class,'index']);
+    Route::get('admin/coupon/manage_coupon', [CouponController::class,'manageCoupon']);
+    Route::get('admin/coupon/manage_coupon/{id}', [CouponController::class,'manageCoupon']);
+    Route::post('admin/coupon/manage_coupon_process', [CouponController::class,'manage_coupon_process'])->name('coupon.manage_coupon_process');
+    Route::get('admin/coupon/remove/{id}', [CouponController::class,'removeCoupon']);
+    // END Coupon
 });

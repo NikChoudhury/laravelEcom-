@@ -1,5 +1,9 @@
 @extends('admin.layouts.app')
-@section("title","Manage Category")
+@if($id>0)
+    @section("title","Edit Category")
+@else
+    @section("title","Add Category")
+@endif
 @push('style-lib')
 <!-- <link href="{{asset('admin_assets/vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all"> -->
 @endpush
@@ -20,15 +24,15 @@
                                     
                                     <ul class="list-unstyled list-inline au-breadcrumb__list">
                                         <li class="list-inline-item active">
-                                            <a href="admin/category">Category</a>
+                                            <a href="{{url('admin/category')}}">Category</a>
                                         </li>
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
                                         </li>
-                                        <li class="list-inline-item">Manage Category</li>
+                                        <li class="list-inline-item">{{ $id > '0' ? "Edit Category" : "Add Category"}}</li>
                                     </ul>
                                 </div>
-                                <h1 class="mb-2">Manage Category</h1>
+                                <h1 class="mb-2">{{ $id > '0' ? "Edit Category" : "Add Category"}}</h1>
                                 <a href="{{url('admin/category')}}" class="au-btn au-btn-icon au-btn--green">Back</button></a>
                             </div>
                         </div>
@@ -76,7 +80,7 @@
                                     <input type="hidden" name="id" value="{{$id}}">       
                                     <div>
                                         <button id="save-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                            <span id="save-button-amount">Save</span>
+                                            <span id="save-button-amount">{{ $id > '0' ? "Update" : "Save"}}</span>
                                             <span id="save-button-sending" style="display:none;">Sending…</span>
                                         </button>
                                     </div>
