@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section("title","Category")
+@section("title","Coupon")
 @push('style-lib')
 <link href="{{asset('admin_assets/vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all">
 @endpush
@@ -20,11 +20,11 @@
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
                                         </li>
-                                        <li class="list-inline-item">Category</li>
+                                        <li class="list-inline-item">Coupon</li>
                                     </ul>
                                 </div>
-                                <h1 class="mb-2">Category</h1>
-                                <a href="{{url('admin/category/manage_category')}}" class="au-btn au-btn-icon au-btn--green"><i class="zmdi zmdi-plus"></i>Add Category</button></a>
+                                <h1 class="mb-2">Coupon</h1>
+                                <a href="{{url('admin/coupon/manage_coupon')}}" class="au-btn au-btn-icon au-btn--green"><i class="zmdi zmdi-plus"></i>Add Coupon</button></a>
                             </div>
                         </div>
                     </div>
@@ -47,8 +47,9 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Category Name</th>
-                                        <th>Category Slug</th>
+                                        <th>Coupon Title</th>
+                                        <th>Coupon Code</th>
+                                        <th>Coupon Value</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -59,12 +60,13 @@
                                         @foreach($data as $list)
                                         <tr>
                                             <td>{{$list->id}}</td>
-                                            <td>{{$list->category_name}}</td>
-                                            <td>{{$list->category_slug}}</td>
+                                            <td>{{$list->title}}</td>
+                                            <td>{{$list->code}}</td>
+                                            <td>{{$list->value}}</td>
                                             <td class='{{ $list->status == '1' ? "process" : "denied"}}'>{{ $list->status == '1' ? "Active" : "Deactive"}}</td>
                                             <td style="display:flex;align-items: center;justify-content: flex-end">
-                                                <a href="{{url('admin/category/remove')}}/{{$list->id}}" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a> &nbsp
-                                                <a href="{{url('admin/category/manage_category')}}/{{$list->id}}" class="btn btn-outline-info"><i class="fas fa-pencil-alt"></i></a>
+                                                <a href="{{url('admin/coupon/remove')}}/{{$list->id}}" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a> &nbsp
+                                                <a href="{{url('admin/coupon/manage_coupon')}}/{{$list->id}}" class="btn btn-outline-info"><i class="fas fa-pencil-alt"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach
