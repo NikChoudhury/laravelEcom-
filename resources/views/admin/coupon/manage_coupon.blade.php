@@ -1,15 +1,15 @@
 @extends('admin.layouts.app')
 @if($id>0)
-    @section("title","Edit Category")
+    @section("title","Edit Coupon")
 @else
-    @section("title","Add Category")
+    @section("title","Add Coupon")
 @endif
 @push('style-lib')
 <!-- <link href="{{asset('admin_assets/vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all"> -->
 @endpush
 @push('style')
 <style>
-        #category_manage_form .error{color:red;margin-top: 5px;}
+        #coupon_manage_form .error{color:red;margin-top: 5px;}
     </style>
 @endpush
 @section('panel')
@@ -24,16 +24,16 @@
                                     
                                     <ul class="list-unstyled list-inline au-breadcrumb__list">
                                         <li class="list-inline-item active">
-                                            <a href="{{url('admin/category')}}">Category</a>
+                                            <a href="{{url('admin/coupon')}}">Coupon</a>
                                         </li>
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
                                         </li>
-                                        <li class="list-inline-item">{{ $id > '0' ? "Edit Category" : "Add Category"}}</li>
+                                        <li class="list-inline-item">{{ $id > '0' ? "Edit Coupon" : "Add Coupon"}}</li>
                                     </ul>
                                 </div>
-                                <h1 class="mb-2">{{ $id > '0' ? "Edit Category" : "Add Category"}}</h1>
-                                <a href="{{url('admin/category')}}" class="au-btn au-btn-icon au-btn--green">Back</button></a>
+                                <h1 class="mb-2">{{ $id > '0' ? "Edit Coupon" : "Add Coupon"}}</h1>
+                                <a href="{{url('admin/coupon')}}" class="au-btn au-btn-icon au-btn--green">Back</button></a>
                             </div>
                         </div>
                     </div>
@@ -51,30 +51,37 @@
                         <!-- Card Start -->
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{route('category.manage_category_process')}}" method="post" name="category_manage_form" id="category_manage_form">
+                                <form action="{{route('coupon.manage_coupon_process')}}" method="post" name="coupon_manage_form" id="coupon_manage_form">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="category_name" class="control-label mb-1">Category Name</label>
-                                        <input id="category_name" name="category_name" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('category_name',$category_name)}}">
-                                        @if($errors->has('category_name'))
-                                            <p class="text-danger mt-2">{{ $errors->first('category_name') }}</p>
+                                        <label for="coupon_title" class="control-label mb-1">Coupon Name</label>
+                                        <input id="coupon_title" name="title" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('title',$title)}}">
+                                        @if($errors->has('title'))
+                                            <p class="text-danger mt-2">{{ $errors->first('title') }}</p>
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label for="category_slug" class="control-label mb-1">Category Slug</label>
-                                        <input id="category_slug" name="category_slug" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('category_slug',$category_slug)}}">
-                                        @if($errors->has('category_slug'))
-                                            <p class="text-danger mt-2">{{ $errors->first('category_slug') }}</p>
+                                        <label for="coupon_code" class="control-label mb-1">Coupon Code</label>
+                                        <input id="coupon_code" name="code" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('code',$code)}}">
+                                        @if($errors->has('code'))
+                                            <p class="text-danger mt-2">{{ $errors->first('code') }}</p>
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label for="category_status" class="control-label mb-1">Status</label>
-                                        <select name="category_status" id="category_status" class="form-control">
-                                            <option value="1" @if (old('category_status',$category_status) == "1") {{ 'selected' }} @endif >Active</option>
-                                            <option value="0" @if (old('category_status',$category_status) == "0") {{ 'selected' }} @endif>Deactive</option>
+                                        <label for="coupon_value" class="control-label mb-1">Coupon Value</label>
+                                        <input id="coupon_value" name="value" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('value',$value)}}">
+                                        @if($errors->has('value'))
+                                            <p class="text-danger mt-2">{{ $errors->first('value') }}</p>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="coupon_status" class="control-label mb-1">Status</label>
+                                        <select name="status" id="coupon_status" class="form-control">
+                                            <option value="1" @if (old('status',$status) == "1") {{ 'selected' }} @endif >Active</option>
+                                            <option value="0" @if (old('status',$status) == "0") {{ 'selected' }} @endif>Deactive</option>
                                         </select>
-                                        @if($errors->has('category_status'))
-                                            <p class="text-danger mt-2">{{ $errors->first('category_status') }}</p>
+                                        @if($errors->has('status'))
+                                            <p class="text-danger mt-2">{{ $errors->first('status') }}</p>
                                         @endif
                                     </div>
                                     <input type="hidden" name="id" value="{{$id}}">       
@@ -110,28 +117,34 @@
 @push('script')
 <script>
         $(function(){
-            $("form[name='category_manage_form']").validate({
+            $("form[name='coupon_manage_form']").validate({
                 rules:{
-                    category_name:{
+                    title:{
                         required:true,
                         minlength:2
                     },
-                    category_slug:{
+                    code:{
                         required:true,
                         minlength:2
                     },
-                    category_status:{
+                    value:{
+                        required:true,
+                    },
+                    status:{
                         required:true,
                     }
                 },
                 messages:{
-                    category_name: {
-                        required: "Please Insert Category Name !!",
+                    title: {
+                        required: "Please Insert Coupon Title !!",
                         minlength: "Atleast 2 character required !!"
                     },
-                    category_slug: {
-                        required: "Please Insert Category Slug !!",
+                    code: {
+                        required: "Please Insert Coupon Code !!",
                         minlength: "Atleast 2 character required !!"
+                    },
+                    value: {
+                        required: "Please Insert Coupon Value !!",
                     },
                     category_status: "Please Select Category Status !!!"
                 }
