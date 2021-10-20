@@ -15,45 +15,19 @@
                 </div> -->
                 <nav class="navbar-sidebar2">
                     <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard
-                                <span class="arrow">
-                                    <i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="index.html">
-                                        <i class="fas fa-tachometer-alt"></i>Dashboard 1</a>
-                                </li>
-                                <li>
-                                    <a href="index2.html">
-                                        <i class="fas fa-tachometer-alt"></i>Dashboard 2</a>
-                                </li>
-                                <li>
-                                    <a href="index3.html">
-                                        <i class="fas fa-tachometer-alt"></i>Dashboard 3</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">
-                                        <i class="fas fa-tachometer-alt"></i>Dashboard 4</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
+                        <li class="@yield('dashboard_active')">
                             <a href="{{url('admin/dashboard')}}">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                             <!-- <span class="inbox-num">3</span> -->
                         </li>
-                        <li>
+                        <li class="@yield('category_active')">
                             <a href="{{url('admin/category')}}">
-                                <i class="fas fa-chart-bar"></i>Category</a>
+                                <i class="fas fa-list-ul"></i>Category</a>
                             <span class="inbox-num">3</span>
                         </li>
-                        <li>
+                        <li class="@yield('coupon_active')">
                             <a href="{{url('admin/coupon')}}">
-                                <i class="fas fa-chart-bar"></i>Coupon</a>
+                                <i class="fas fa-tag"></i>Coupon</a>
                         </li>
                     </ul>
                 </nav>

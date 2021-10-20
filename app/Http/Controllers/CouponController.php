@@ -87,9 +87,31 @@ class CouponController extends Controller
         $model= Coupon::where('status','!=','-1')->find($id);
         // $model = Category::find($id);
         if ($model) {
-            $model->status = "-1";
+            // $model->status = "-1";
             $model->delete();
             $request->session()->flash('message','Coupon Deleted Successfully');
+            return redirect(url('admin/coupon'));
+        }else{
+            $request->session()->flash('error','Data Not Found !!!');
+            return redirect(url('admin/coupon'));
+        }
+    }
+
+    public function changeStatus(Request $request,$status,$id)
+    {
+        $model= Coupon::where('status','!=','-1')->find($id);
+        if ($model) {
+            $status= $request->status;
+            if ($status=="deactive") {
+                $model->status = "1";
+            }elseif ($status=="active") {
+                $model->status = "0";
+            }else {
+                $request->session()->flash('error','Something Went Wrong !!!');
+                return redirect(url('admin/coupon'));
+            }
+            $model->save();
+            $request->session()->flash('message','Status Updated !!');
             return redirect(url('admin/coupon'));
         }else{
             $request->session()->flash('error','Data Not Found !!!');

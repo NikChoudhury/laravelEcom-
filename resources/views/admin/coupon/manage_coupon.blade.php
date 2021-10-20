@@ -4,6 +4,7 @@
 @else
     @section("title","Add Coupon")
 @endif
+@section("coupon_active","active")
 @push('style-lib')
 <!-- <link href="{{asset('admin_assets/vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all"> -->
 @endpush

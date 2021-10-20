@@ -80,9 +80,31 @@ class AdminCategoryController extends Controller
         $model= Category::where('status','!=','-1')->find($id);
         // $model = Category::find($id);
         if ($model) {
-            $model->status = "-1";
+            // $model->status = "-1";
             $model->delete();
             $request->session()->flash('message','Category Deleted Successfully');
+            return redirect(url('admin/category'));
+        }else{
+            $request->session()->flash('error','Data Not Found !!!');
+            return redirect(url('admin/category'));
+        }
+    }
+
+    public function changeStatus(Request $request,$status,$id)
+    {
+        $model= Category::where('status','!=','-1')->find($id);
+        if ($model) {
+            $status= $request->status;
+            if ($status=="deactive") {
+                $model->status = "1";
+            }elseif ($status=="active") {
+                $model->status = "0";
+            }else {
+                $request->session()->flash('error','Something Went Wrong !!!');
+                return redirect(url('admin/category'));
+            }
+            $model->save();
+            $request->session()->flash('message','Status Updated !!');
             return redirect(url('admin/category'));
         }else{
             $request->session()->flash('error','Data Not Found !!!');

@@ -1,5 +1,6 @@
 @extends('admin.layouts.app')
 @section("title","Coupon")
+@section("coupon_active","active")
 @push('style-lib')
 <link href="{{asset('admin_assets/vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all">
 @endpush
@@ -63,10 +64,10 @@
                                             <td>{{$list->title}}</td>
                                             <td>{{$list->code}}</td>
                                             <td>{{$list->value}}</td>
-                                            <td class='{{ $list->status == '1' ? "process" : "denied"}}'>{{ $list->status == '1' ? "Active" : "Deactive"}}</td>
+                                            <td><a onclick="openUrl('{{url('admin/coupon/status')}}/{{ $list->status == '1' ? 'active' : 'deactive'}}/{{$list->id}}')" class="btn badge rounded-pill text-dark {{ $list->status == '1' ? 'bg-success' : 'bg-warning'}}"> {{ $list->status == '1' ? "Active" : "Deactive"}}</a></td>
                                             <td style="display:flex;align-items: center;justify-content: flex-end">
-                                                <a href="{{url('admin/coupon/remove')}}/{{$list->id}}" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a> &nbsp
-                                                <a href="{{url('admin/coupon/manage_coupon')}}/{{$list->id}}" class="btn btn-outline-info"><i class="fas fa-pencil-alt"></i></a>
+                                                <p onclick="openUrl('{{url('admin/coupon/remove')}}/{{$list->id}}')"  class="btn btn-outline-danger" ><i class="fas fa-trash-alt"></i></p> &nbsp
+                                                <p onclick="openUrl('{{url('admin/coupon/manage_coupon')}}/{{$list->id}}')" class="btn btn-outline-info"><i class="fas fa-pencil-alt"></i></p>
                                             </td>
                                         </tr>
                                         @endforeach
