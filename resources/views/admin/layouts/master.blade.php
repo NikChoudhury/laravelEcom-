@@ -40,6 +40,8 @@
     
     <!-- Main JS-->
     <script src="{{asset('admin_assets/js/main.js')}}"></script>
+    <!-- Custome JS -->
+    <script src="{{asset('admin_assets/js/custom.js')}}"></script>
     @stack('script')
 </body>
 

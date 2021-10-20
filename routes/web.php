@@ -21,6 +21,7 @@ Route::middleware(['admin_auth'])->group(function () {
     Route::get('admin/category/manage_category/{id}', [AdminCategoryController::class,'manageCategory']);
     Route::post('admin/category/manage_category_process', [AdminCategoryController::class,'manage_category_process'])->name('category.manage_category_process');
     Route::get('admin/category/remove/{id}', [AdminCategoryController::class,'removeCategory']);
+    Route::get('admin/category/status/{status}/{id}', [AdminCategoryController::class,'changeStatus']);
     // END Category
     // Coupon
     Route::get('admin/coupon', [CouponController::class,'index']);
@@ -28,5 +29,6 @@ Route::middleware(['admin_auth'])->group(function () {
     Route::get('admin/coupon/manage_coupon/{id}', [CouponController::class,'manageCoupon']);
     Route::post('admin/coupon/manage_coupon_process', [CouponController::class,'manageCouponProcess'])->name('coupon.manage_coupon_process');
     Route::get('admin/coupon/remove/{id}', [CouponController::class,'removeCoupon']);
+    Route::get('admin/coupon/status/{status}/{id}', [CouponController::class,'changeStatus']);
     // END Coupon
 });
