@@ -9,11 +9,6 @@
 <!-- <link href="{{asset('admin_assets/vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all"> -->
 <link rel="stylesheet" href="{{asset('admin_assets/vendor/coloris/coloris.min.css')}}"/>
 @endpush
-@push('style')
-<style>
-        #main_form .error{color:red;margin-top: 5px;}
-    </style>
-@endpush
 @section('panel')
     <!-- BREADCRUMB-->
     <section class="au-breadcrumb m-t-75">
@@ -52,7 +47,7 @@
                         <!-- Card Start -->
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{route('color.manage_color_process')}}" method="post" name="main_form" id="main_form">
+                                <form action="{{route('color.manage_color_process')}}" method="post" name="color_manage_form" id="color_manage_form" class="form-validation-error">
                                     @csrf
                                     <div class="form-group color-code-div">
                                         <label for="title1" class="control-label mb-1">Color Code</label>
@@ -109,81 +104,38 @@
 
 @endsection
 @push('script-lib')
-<script src="{{asset('admin_assets/js/jquery.validate.min.js')}}"></script>
-<script src="{{asset('admin_assets/js/customValidationFunction.js')}}"></script>
 <script src="{{asset('admin_assets/vendor/coloris/coloris.min.js')}}"></script>
 <script src="{{asset('admin_assets/vendor/coloris/ntc.js')}}"></script>
+<script src="{{asset('admin_assets/vendor/validateJs/jquery.validate.min.js')}}"></script>
+<script src="{{asset('admin_assets/vendor/validateJs/additional-methods.min.js')}}"></script>
+<script src="{{asset('admin_assets/js/mainValidation.js')}}" defer></script>
 @endpush
 
 @push('script')
 <script>
-        $(function(){
-            $("form[name='main_form']").validate({
-                rules:{
-                    color_code:{
-                        required:true,
-                        regex : /^#[0-9a-fA-F]{8}$|#[0-9a-fA-F]{6}$|#[0-9a-fA-F]{4}$|#[0-9a-fA-F]{3}$/
-                    },
-                    color_name:{
-                        required:true,
-                        minlength:2,
-                        maxlength:30,
-                    },
-                    status:{
-                        required:true,
-                    }
-                },
-                messages:{
-                    color_code: {
-                        required: "Please Insert Color Code !!",
-                        regex: "Color Code Should Be A hex Value !!"
-                    },
-                    color_name: {
-                        required: "Please Insert Color Code !!",
-                        minlength: "Atleast 2 character required !!",
-                        maxlength: "Max Length is 30 characters !!",
-                    },
-                    
-                    status: "Please Select Category Status !!!"
-                },
-                errorPlacement: function(error, element){
-                    if (element.attr("name") == "color_code") {
-                        error.appendTo(element.parents(".color-code-div"))
-                    }else if(element.attr("name") == "color_name"){
-                        error.appendTo(element.parents(".color-name-div"))
-                    }else{
-                        error.insertAfter(element);
-                    }
-                }  
-
-            });
-        });
-
-        Coloris({
-            parent: '.container',
-            el: 'color-field',
-            wrap: true,
-            theme: 'polaroid-dark',
-            format: 'hex',
-            clearButton: {
-                show: true,
-                label: 'Clear'
-            },
-            swatches: [
-            '#FF0000',
-            '#00FFFF',
-            '#0000FF',
-            '#800080',
-            '#FFFF00',
-            '#FF00FF',
-            '#FFC0CB',
-            '#C0C0C0',
-            '#FFA500',
-            ]
-        })
-    </script>
-      <script type="text/javascript">
-        $('#title1').on('change', function() {
+    Coloris({
+        parent: '.container',
+        el: 'color-field',
+        wrap: true,
+        theme: 'polaroid-dark',
+        format: 'hex',
+        clearButton: {
+            show: true,
+            label: 'Clear'
+        },
+        swatches: [
+        '#FF0000',
+        '#00FFFF',
+        '#0000FF',
+        '#800080',
+        '#FFFF00',
+        '#FF00FF',
+        '#FFC0CB',
+        '#C0C0C0',
+        '#FFA500',
+        ]
+    })
+    $('#title1').on('change', function() {
             // alert( this.value );
             var n_match  = ntc.name(this.value);
             n_rgb        = n_match[0]; // This is the RGB value of the closest matching color
@@ -195,6 +147,6 @@
             }else{
                 $('#exactmatch').text("Approx Match")
             }
-        });
-    </script>
+    });
+</script>
 @endpush

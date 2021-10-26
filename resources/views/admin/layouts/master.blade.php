@@ -22,6 +22,7 @@
     @stack('style-lib')
     <!-- Main CSS-->
     <link href="{{asset('admin_assets/css/theme.css')}}" rel="stylesheet" media="all">
+    <link href="{{asset('admin_assets/css/custom.css')}}" rel="stylesheet" media="all">
     @stack('style')
 </head>
 

@@ -5,14 +5,6 @@
     @section("title","Add Coupon")
 @endif
 @section("coupon_active","active")
-@push('style-lib')
-<!-- <link href="{{asset('admin_assets/vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all"> -->
-@endpush
-@push('style')
-<style>
-        #coupon_manage_form .error{color:red;margin-top: 5px;}
-    </style>
-@endpush
 @section('panel')
     <!-- BREADCRUMB-->
     <section class="au-breadcrumb m-t-75">
@@ -52,7 +44,7 @@
                         <!-- Card Start -->
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{route('coupon.manage_coupon_process')}}" method="post" name="coupon_manage_form" id="coupon_manage_form">
+                                <form action="{{route('coupon.manage_coupon_process')}}" method="post" name="coupon_manage_form" id="coupon_manage_form" class="form-validation-error">
                                     @csrf
                                     <div class="form-group">
                                         <label for="coupon_title" class="control-label mb-1">Coupon Name</label>
@@ -112,44 +104,7 @@
 
 @endsection
 @push('script-lib')
-<script src="{{asset('admin_assets/js/jquery.validate.min.js')}}"></script>
-@endpush
-
-@push('script')
-<script>
-        $(function(){
-            $("form[name='coupon_manage_form']").validate({
-                rules:{
-                    title:{
-                        required:true,
-                        minlength:2
-                    },
-                    code:{
-                        required:true,
-                        minlength:2
-                    },
-                    value:{
-                        required:true,
-                    },
-                    status:{
-                        required:true,
-                    }
-                },
-                messages:{
-                    title: {
-                        required: "Please Insert Coupon Title !!",
-                        minlength: "Atleast 2 character required !!"
-                    },
-                    code: {
-                        required: "Please Insert Coupon Code !!",
-                        minlength: "Atleast 2 character required !!"
-                    },
-                    value: {
-                        required: "Please Insert Coupon Value !!",
-                    },
-                    status: "Please Select Status !!!"
-                }
-            });
-        });
-    </script>
+<script src="{{asset('admin_assets/vendor/validateJs/jquery.validate.min.js')}}"></script>
+<script src="{{asset('admin_assets/vendor/validateJs/additional-methods.min.js')}}"></script>
+<script src="{{asset('admin_assets/js/mainValidation.js')}}" defer></script>
 @endpush
