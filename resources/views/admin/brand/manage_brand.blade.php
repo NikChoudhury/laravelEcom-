@@ -5,14 +5,7 @@
     @section("title","Add Brand")
 @endif
 @section("brand_active","active")
-@push('style-lib')
-<!-- <link href="{{asset('admin_assets/vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all"> -->
-@endpush
-@push('style')
-<style>
-        #main_form .error{color:red;margin-top: 5px;}
-    </style>
-@endpush
+
 @section('panel')
     <!-- BREADCRUMB-->
     <section class="au-breadcrumb m-t-75">
@@ -52,7 +45,7 @@
                         <!-- Card Start -->
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{route('brand.manage_brand_process')}}" method="post" name="main_form" id="main_form" enctype="multipart/form-data">
+                                <form action="{{route('brand.manage_brand_process')}}" method="post" name="brand_manage_form" id="brand_manage_form" enctype="multipart/form-data" class="form-validation-error">
                                     @csrf
                                     <div class="form-group">
                                         <label for="brand_name" class="control-label mb-1">Brand Name</label>
@@ -137,38 +130,7 @@
 
 @endsection
 @push('script-lib')
-<script src="{{asset('admin_assets/js/jquery.validate.min.js')}}"></script>
-<script src="{{asset('admin_assets/js/additional-methods.min.js')}}"></script>
-<script src="{{asset('admin_assets/js/customValidationFunction.js')}}"></script>
-@endpush
-
-@push('script')
-<script>
-        $(function(){
-            $("form[name='main_form']").validate({
-                rules:{
-                    brand_name:{
-                        required:true,
-                        minlength:1,
-                        noSpace: true
-                    },
-                    brand_logo:{
-                        extension: "png|jpe?g|gif"
-                    },
-                    brand_website: "noSpace",
-                    brand_description: "noSpace",
-                    status:{
-                        required:true,
-                    }
-                },
-                messages:{
-                    brand_name: {
-                        required: "Please Insert Brand Name !!",
-                        minlength: "Atleast 1 character required !!"
-                    },
-                    status: "Please Select Status !!!"
-                }
-            });
-        });
-    </script>
+<script src="{{asset('admin_assets/vendor/validateJs/jquery.validate.min.js')}}"></script>
+<script src="{{asset('admin_assets/vendor/validateJs/additional-methods.min.js')}}"></script>
+<script src="{{asset('admin_assets/js/mainValidation.js')}}" defer></script>
 @endpush

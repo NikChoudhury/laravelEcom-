@@ -5,14 +5,6 @@
     @section("title","Add Size")
 @endif
 @section("size_active","active")
-@push('style-lib')
-<!-- <link href="{{asset('admin_assets/vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all"> -->
-@endpush
-@push('style')
-<style>
-        #main_form .error{color:red;margin-top: 5px;}
-    </style>
-@endpush
 @section('panel')
     <!-- BREADCRUMB-->
     <section class="au-breadcrumb m-t-75">
@@ -43,7 +35,7 @@
     </section>
     <!-- END BREADCRUMB-->
     
-    <!-- Category-->
+    <!-- Main Section-->
     <section class="statistic">
         <div class="section__content section__content--p30">
             <div class="container-fluid">
@@ -52,7 +44,7 @@
                         <!-- Card Start -->
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{route('size.manage_size_process')}}" method="post" name="main_form" id="main_form">
+                                <form action="{{route('size.manage_size_process')}}" method="post" name="size_manage_form" id="size_manage_form" class="form-validation-error">
                                     @csrf
                                     <div class="form-group">
                                         <label for="size_title" class="control-label mb-1">Size</label>
@@ -94,35 +86,10 @@
     </section>
     <!-- END Category-->  
     
-   
-
 @endsection
-@push('script-lib')
-<script src="{{asset('admin_assets/js/jquery.validate.min.js')}}"></script>
-@endpush
 
-@push('script')
-<script>
-        $(function(){
-            $("form[name='main_form']").validate({
-                rules:{
-                    size:{
-                        required:true,
-                        minlength:1
-                    },
-                    status:{
-                        required:true,
-                    }
-                },
-                messages:{
-                    size: {
-                        required: "Please Insert Size !!",
-                        minlength: "Atleast 1 character required !!"
-                    },
-                    
-                    status: "Please Select Category Status !!!"
-                }
-            });
-        });
-    </script>
+@push('script-lib')
+<script src="{{asset('admin_assets/vendor/validateJs/jquery.validate.min.js')}}"></script>
+<script src="{{asset('admin_assets/vendor/validateJs/additional-methods.min.js')}}"></script>
+<script src="{{asset('admin_assets/js/mainValidation.js')}}" defer></script>
 @endpush

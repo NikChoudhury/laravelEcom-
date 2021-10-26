@@ -5,14 +5,6 @@
     @section("title","Add Category")
 @endif
 @section("category_active","active")
-@push('style-lib')
-<!-- <link href="{{asset('admin_assets/vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all"> -->
-@endpush
-@push('style')
-<style>
-        #category_manage_form .error{color:red;margin-top: 5px;}
-    </style>
-@endpush
 @section('panel')
     <!-- BREADCRUMB-->
     <section class="au-breadcrumb m-t-75">
@@ -52,7 +44,7 @@
                         <!-- Card Start -->
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{route('category.manage_category_process')}}" method="post" name="category_manage_form" id="category_manage_form">
+                                <form action="{{route('category.manage_category_process')}}" method="post" name="category_manage_form" id="category_manage_form" class="form-validation-error">
                                     @csrf
                                     <div class="form-group">
                                         <label for="category_name" class="control-label mb-1">Category Name</label>
@@ -101,42 +93,10 @@
     </section>
     <!-- END Category-->  
     
-   
-
 @endsection
-@push('script-lib')
-<script src="{{asset('admin_assets/js/jquery.validate.min.js')}}"></script>
-@endpush
 
-@push('script')
-<script>
-        $(function(){
-            $("form[name='category_manage_form']").validate({
-                rules:{
-                    category_name:{
-                        required:true,
-                        minlength:2
-                    },
-                    category_slug:{
-                        required:true,
-                        minlength:2
-                    },
-                    category_status:{
-                        required:true,
-                    }
-                },
-                messages:{
-                    category_name: {
-                        required: "Please Insert Category Name !!",
-                        minlength: "Atleast 2 character required !!"
-                    },
-                    category_slug: {
-                        required: "Please Insert Category Slug !!",
-                        minlength: "Atleast 2 character required !!"
-                    },
-                    category_status: "Please Select Category Status !!!"
-                }
-            });
-        });
-    </script>
+@push('script-lib')
+<script src="{{asset('admin_assets/vendor/validateJs/jquery.validate.min.js')}}"></script>
+<script src="{{asset('admin_assets/vendor/validateJs/additional-methods.min.js')}}"></script>
+<script src="{{asset('admin_assets/js/mainValidation.js')}}" defer></script>
 @endpush
