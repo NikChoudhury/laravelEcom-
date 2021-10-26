@@ -18,3 +18,17 @@
     - For Making Coupon Model and controller and migration
 9. php artisan migrate
     - For Creating Coupan table
+10. php artisan make:model Size -mcr
+    - For Making Size Model and controller and migration
+11. php artisan migrate
+    - For Creating Size table
+12. php artisan make:model Color -mcr
+    - For Making Color Model and controller and migration
+13. php artisan migrate
+    - For Creating Color table
+14. php artisan make:model Brand -mcr
+    - For Making Brand Model and controller and migration
+15. php artisan migrate
+    - For Creating Brand table
+16. php artisan storage:link
+    - To create the symbolic link, Once a file has been stored and the symbolic link has been created.

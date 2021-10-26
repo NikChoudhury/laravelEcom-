@@ -29,6 +29,18 @@
                             <a href="{{url('admin/coupon')}}">
                                 <i class="fas fa-tag"></i>Coupon</a>
                         </li>
+                        <li class="@yield('size_active')">
+                            <a href="{{url('admin/size')}}">
+                            <i class="far fa-window-maximize"></i>Size</a>
+                        </li>
+                        <li class="@yield('color_active')">
+                            <a href="{{url('admin/color')}}">
+                            <i class="fas fa-paint-brush"></i>Color</a>
+                        </li>
+                        <li class="@yield('brand_active')">
+                            <a href="{{url('admin/brand')}}">
+                            <i class="fas fa-building"></i>Brand</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
