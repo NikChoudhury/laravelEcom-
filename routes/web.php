@@ -7,6 +7,7 @@ Use App\Http\Controllers\CouponController;
 Use App\Http\Controllers\SizeController;
 Use App\Http\Controllers\ColorController;
 Use App\Http\Controllers\BrandController;
+Use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,4 +60,12 @@ Route::middleware(['admin_auth'])->group(function () {
     Route::get('admin/brand/remove/{id}', [BrandController::class,'removeBrand']);
     Route::get('admin/brand/status/{status}/{id}', [BrandController::class,'changeStatus']);
     // END Brand
+    // Product
+    Route::get('admin/product', [ProductController::class,'index']);
+    Route::get('admin/product/manage_product', [ProductController::class,'manageProduct']);
+    Route::get('admin/product/manage_product/{id}', [ProductController::class,'manageProduct']);
+    Route::post('admin/product/manage_product_process', [ProductController::class,'manageProductProcess'])->name('product.manage_product_process');
+    Route::get('admin/product/remove/{id}', [ProductController::class,'removeProduct']);
+    Route::get('admin/product/status/{status}/{id}', [ProductController::class,'changeStatus']);
+    // END Product
 });

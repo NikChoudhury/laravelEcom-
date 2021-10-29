@@ -32,3 +32,9 @@
     - For Creating Brand table
 16. php artisan storage:link
     - To create the symbolic link, Once a file has been stored and the symbolic link has been created.
+17. php artisan make:model Product -mcr
+    - For Making Product Model and controller and migration
+18. php artisan migrate
+    - For Creating Product table
+19. composer dump-autoload
+    - For using helper function

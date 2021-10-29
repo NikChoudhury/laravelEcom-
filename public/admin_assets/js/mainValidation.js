@@ -189,5 +189,69 @@ $(function () {
     });
     /* END Brand Manage Form */
 
+    /* START Product Manage Form */
+    $("form[name='admin_product_manage_form']").validate({
+        rules: {
+            name: {
+                required: true,
+                noSpace: true,
+            },
+            category_id: {
+                required: true,
+                noSpace: true,
+            },
+            image: {
+                required: isImageRequired,
+                extension: "png|jpe?g|gif",
+            },
+            brand: {
+                // required: true,
+                noSpace: true,
+            },
+            model: {
+                // required: true,
+                noSpace: true,
+            },
+            short_desc: {
+                // required: true,
+                noSpace: true,
+            },
+            desc: {
+                // required: true,
+                noSpace: true,
+            },
+            keywords: {
+                // required: true,
+                noSpace: true,
+            },
+            technical_specification: {
+                // required: true,
+                noSpace: true,
+            },
+            uses: {
+                // required: true,
+                noSpace: true,
+            },
+            warranty: {
+                // required: true,
+                noSpace: true,
+            },
+            status: {
+                required: true,
+            },
+        },
+        messages: {
+            name: {
+                required: "Please Insert Product Name !!",
+            },
+            image: {
+                required: "Please Select An Image !!",
+                extension: "Please Select An Valid Image !!",
+            },
+            status: "Please Select Status !!!",
+        },
+    });
+    /* END Brand Manage Form */
+
     //  All admin Side Form END
 });
