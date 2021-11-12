@@ -66,6 +66,7 @@ Route::middleware(['admin_auth'])->group(function () {
     Route::get('admin/product/manage_product/{id}', [ProductController::class,'manageProduct']);
     Route::post('admin/product/manage_product_process', [ProductController::class,'manageProductProcess'])->name('product.manage_product_process');
     Route::get('admin/product/remove/{id}', [ProductController::class,'removeProduct']);
+    Route::get('admin/product/remove_product_attr/{product_attr_id}/{product_id}', [ProductController::class,'removeProductAttr']);
     Route::get('admin/product/status/{status}/{id}', [ProductController::class,'changeStatus']);
     // END Product
 });

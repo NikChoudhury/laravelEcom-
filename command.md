@@ -38,3 +38,9 @@
     - For Creating Product table
 19. composer dump-autoload
     - For using helper function
+20. php artisan make:migration create_product_attrs_table
+    - For Making product_attrs table
+21. php artisan migrate
+    - For Creating Product_attrs table
+22. php artisan make:request ProductFormRequest
+    - For Creating Product Request 

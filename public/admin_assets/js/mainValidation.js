@@ -191,6 +191,7 @@ $(function () {
 
     /* START Product Manage Form */
     $("form[name='admin_product_manage_form']").validate({
+        ignore: [],
         rules: {
             name: {
                 required: true,
@@ -239,17 +240,61 @@ $(function () {
             status: {
                 required: true,
             },
+            'sku[]': {
+                required: true,
+                noSpace: true,
+            },
+            'mrp[]': {
+                required: true,
+                number: true,
+                min: .1,
+                noSpace: true,
+            },
+            'price[]': {
+                required: true,
+                number: true,
+                min: .1,
+                noSpace: true,
+            },
+            'qty[]': {
+                required: true,
+                digits: true,
+                min: 1,
+                noSpace: true,
+            },
+            'attr_image[]': {
+                extension: "png|jpe?g|gif",
+            }
         },
         messages: {
             name: {
                 required: "Please Insert Product Name !!",
             },
+            category_id: {
+                required: "Please Select Category !!",
+            },
             image: {
                 required: "Please Select An Image !!",
                 extension: "Please Select An Valid Image !!",
             },
+            'sku[]': {
+                required: "Please Insert SKU !!",
+            },
+            'mrp[]': {
+                required: "Please Insert MRP !!",
+            },
+            'price[]': {
+                required: "Please Insert Price !!",
+            },
+            'qty[]': {
+                required: "Please Insert Quantity !!",
+            },
+            'attr_image[]': {
+                extension: "Please Select An Valid Image !!",
+            },
             status: "Please Select Status !!!",
         },
+
     });
     /* END Brand Manage Form */
 

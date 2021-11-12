@@ -2,3 +2,94 @@
     color: red;
     margin-top: 5px;
 }
+/* Preview Image Box On Product Manage Page Start */
+.image-box-card {
+    background: #ffffff;
+    /* padding: 2px; */
+    /* overflow: hidden; */
+    max-width: 100%;
+    /* border: 1px solid #777; */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.image-card-header.card-image {
+    overflow: hidden;
+}
+.image-card-header.card-image a {
+    width: 100%;
+}
+.image-card-header.card-image > img {
+    display: block;
+    width: 100%;
+    height: 190px;
+    max-height: 200px;
+    aspect-ratio: 16/9;
+    object-fit: contain;
+    object-position: center;
+}
+.image-card-header.card-image a > img {
+    /* display: block; */
+    width: 100%;
+    height: 190px;
+    max-height: 200px;
+    aspect-ratio: 16/9;
+    object-fit: contain;
+    object-position: center;
+}
+.image-card-footer {
+    text-align: center;
+}
+.image-card-footer input {
+    /* opacity: 0; */
+    display: none;
+}
+.image-card-footer label {
+    display: block;
+    color: #fff;
+    background: #000;
+    padding: 0.3rem 0.6rem;
+    font-size: 115%;
+    cursor: pointer;
+}
+.image-card-footer label i {
+    font-size: 125%;
+    margin-right: 0.3rem;
+}
+.image-card-footer label:hover i {
+    animation: shake 0.35s;
+}
+@keyframes shake {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(10deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-10deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+.ripple_animate {
+    -webkit-animation: ripple 0.4s linear;
+    animation: ripple 0.4s linear;
+}
+@-webkit-keyframes ripple {
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+}
+
+@keyframes ripple {
+    100% {
+        opacity: 0;
+        transform: scale(2.5);
+    }
+}
+/* Preview Image Box On Product Manage Page END */
