@@ -41,6 +41,10 @@
                             <a href="{{url('admin/brand')}}">
                             <i class="fas fa-building"></i>Brand</a>
                         </li>
+                        <li class="@yield('product_active')">
+                            <a href="{{url('admin/product')}}">
+                            <i class="fab fa-product-hunt"></i>Product</a>
+                        </li>
                     </ul>
                 </nav>
             </div>

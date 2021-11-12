@@ -69,7 +69,7 @@ class BrandController extends Controller
         $model->brand_website=$request->post('brand_website');
         # Upload File with a New name
         if ($request->file('brand_logo')) {
-            $fileName = $request->brand_logo->getClientOriginalName().'_'.time();
+            $fileName = time().'-'.$request->brand_logo->getClientOriginalName();
             $request->file('brand_logo')->storeAs('uploads/brand', $fileName, 'public');
             $model->brand_logo = $fileName;
         }
