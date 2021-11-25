@@ -14,6 +14,7 @@
 }
 .image-card-header.card-image {
     overflow: hidden;
+    position: relative;
 }
 .image-card-header.card-image a {
     width: 100%;
@@ -50,6 +51,7 @@
     padding: 0.3rem 0.6rem;
     font-size: 115%;
     cursor: pointer;
+    margin-bottom: 0;
 }
 .image-card-footer label i {
     font-size: 125%;
@@ -92,4 +94,52 @@
         transform: scale(2.5);
     }
 }
+
+.remove-image-btn {
+    display: none;
+    position: absolute;
+    /* width: 20px; */
+    top: 1px;
+    right: 3px;
+    border-radius: 10em;
+    padding: 2px 6px 3px;
+    text-decoration: none;
+    font: 700 21px/20px sans-serif;
+    background: #555;
+    border: 3px solid #fff;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    -webkit-transition: background 0.5s;
+    transition: background 0.5s;
+}
+.remove-image-btn:hover {
+    background: #e54e4e;
+    padding: 3px 7px 5px;
+    top: 2px;
+    right: 2px;
+}
+.remove-image-btn:active {
+    background: #e54e4e;
+}
+.image-card-header.add-more-btn {
+    display: flex;
+    width: 100%;
+    height: 190px;
+    max-height: 200px;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.image-card-header.add-more-btn button {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    font-size: 2em;
+}
 /* Preview Image Box On Product Manage Page END */
+.gird-image-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    align-items: flex-start;
+}

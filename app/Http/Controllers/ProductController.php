@@ -6,10 +6,15 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProductFormRequest;
-use App\Rules\isUniqueSku;
+use Storage;
 
 class ProductController extends Controller
 {
+    private $destinationPathArr =[
+        "product_image"=> "uploads/product",
+        'product_images'=> "uploads/product/product-images",
+        'product_attr_image' => "uploads/product/attributes-image"
+    ];
     public function index()
     {
         $result['data']= Product::where('status','!=','-1')->orderBy('created_at', 'desc')->get();
@@ -23,7 +28,16 @@ class ProductController extends Controller
         if ($id>0) {
             // Get Product Attribute Table Data
             $data['productAttributeData']=DB::table('product_attrs')->where(['product_id'=>$id])->get();
-            
+            // Get Product Images Table Data
+            $productImagesData=DB::table('product_images')->where(['product_id'=>$id])->get();
+            if (!isset($productImagesData[0])) {
+                $data['productImagesData']['0']['id']='';
+                $data['productImagesData']['0']['product_id']='';
+                $data['productImagesData']['0']['images']='';
+            }else{
+                $data['productImagesData'] = $productImagesData;
+            }
+
             $model = Product::where(['id'=>$id])->get();
             if (!$model->isEmpty()) {
                 $data['id']=$model['0']->id;
@@ -70,6 +84,11 @@ class ProductController extends Controller
             $data['productAttributeData'][0]['qty']='';
             $data['productAttributeData'][0]['size_id']='';
             $data['productAttributeData'][0]['color_id']='';
+
+            $data['productImagesData'][0]['id']='';
+            $data['productImagesData'][0]['product_id']='';
+            $data['productImagesData'][0]['images']='';
+
         }
         // Get Category Table Data
         $data['categoryData']=DB::table('categories')->where(['status'=>'1'])->get();
@@ -79,12 +98,13 @@ class ProductController extends Controller
         $data['sizeData']=DB::table('sizes')->where(['status'=>'1'])->get();
         // Get Color Table Data
         $data['colorData']=DB::table('colors')->where(['status'=>'1'])->get();
-      
+        
         return view('admin/product/manage_product',$data);
     }
     
     public function manageProductProcess(ProductFormRequest $request)
     {
+        
         
         if ($request->post('id')>0) {
             $model = Product::find($request->post('id'));
@@ -117,11 +137,19 @@ class ProductController extends Controller
 
         // Image Upload
         if ($request->hasfile('image')) {
+            // Check Image Is Already Exist Or Not And Delete
+            if ($request->post('id')>0){
+                $getModel = DB::table('products')->where(['id'=>$request->post('id')])->get();
+                $path_of_the_file = "/public/".$this->destinationPathArr['product_image']."/".$getModel[0]->image;
+                if (Storage::exists($path_of_the_file)){
+                    Storage::delete($path_of_the_file);
+                }
+            }
+            // ##################### //
             $image = $request->file('image');
             $ext = $image->getClientOriginalExtension();
             $image_name = getSlug($request->post('name')).'-'.time().'.'.$ext;
-            $destinationPath = 'uploads/product';
-            $image->storeAs($destinationPath, $image_name,'public');
+            $image->storeAs($this->destinationPathArr['product_image'], $image_name,'public');
             $model->image = $image_name;
         }
         // End Image Upload
@@ -140,12 +168,43 @@ class ProductController extends Controller
         $model->status=$request->post('status');
 
         $isModelSaved = $model->save();
+        $productID =$model->id;
+
+        // Product Images Start
+        $product_images_id_arry = $request->post('product_images_id');
+        foreach ($product_images_id_arry as $key => $value) {
+            $productImagesArr = [];
+            $productImagesArr['product_id'] = $productID;
+            if ($request->hasfile("images.$key")) {
+                if ($product_images_id_arry[$key]!=''){
+                    $getModel = DB::table('product_images')->where(['id'=>$product_images_id_arry[$key]])->get();
+                    $path_of_the_file = "/public/".$this->destinationPathArr['product_images']."/".$getModel[0]->images;
+                    if (Storage::exists($path_of_the_file)){
+                        Storage::delete($path_of_the_file);
+                    }
+                }
+                // ##################### //
+                $randomNumber = rand('1111111','999999999');
+                $images = $request->file("images.$key");
+                $ext = $images->getClientOriginalExtension();
+                $images_name = getSlug($request->post('name')).'-'.time().'-'.$randomNumber.'.'.$ext;
+                $images->storeAs($this->destinationPathArr['product_images'], $images_name,'public');
+                $productImagesArr['images'] = $images_name;
+
+                if ($product_images_id_arry[$key]!='') {
+                    DB::table('product_images')->where(['id'=>$product_images_id_arry[$key]])->update($productImagesArr);   
+                }else {
+                    DB::table('product_images')->insert($productImagesArr);   
+                }
+            }
+            
+           
+        }
+        // Product Images END
 
         // Product Attribute Part 2 Start //
-        $productID =$model->id;
-        // $validation_rule['sku.*'] = ['required'];
-        // $request->validate($validation_rule);
         foreach ($skuArr as $key => $value) {
+            $productAttrArr = [];
             $productAttrArr['product_id'] = $productID;
             $productAttrArr['sku'] = $skuArr[$key];
             $productAttrArr['mrp'] = $mrpArr[$key];
@@ -156,12 +215,20 @@ class ProductController extends Controller
 
             // Product Attr Image Upload
             if ($request->hasfile("attr_image.$key")) {
+                 // Check Image Is Already Exist Or Not And Delete
+                if ($productAttrIdArr[$key]!=''){
+                    $getModel = DB::table('product_attrs')->where(['id'=>$productAttrIdArr[$key]])->get();
+                    $path_of_the_file = "/public/".$this->destinationPathArr['product_attr_image']."/".$getModel[0]->attr_image;
+                    if (Storage::exists($path_of_the_file)){
+                        Storage::delete($path_of_the_file);
+                    }
+                }
+                // ##################### //
                 $randomNumber = rand('1111111','999999999');
                 $attr_image = $request->file("attr_image.$key");
                 $ext = $attr_image->getClientOriginalExtension();
                 $attr_image_name = getSlug($request->post('name')).'-'.time().'-'.$randomNumber.'.'.$ext;
-                $destinationPath = 'uploads/product/attributes-image';
-                $attr_image->storeAs($destinationPath, $attr_image_name,'public');
+                $attr_image->storeAs($this->destinationPathArr['product_attr_image'], $attr_image_name,'public');
                 $productAttrArr['attr_image'] = $attr_image_name;
             }
             // Product Attr Image Upload END
@@ -185,6 +252,11 @@ class ProductController extends Controller
     {
         $model= Product::where('status','!=','-1')->find($id);
         if ($model) {
+            $getModel = DB::table('products')->where(['id'=>$id])->get();
+            $path_of_the_file = "/public/".$this->destinationPathArr['product_image']."/".$getModel[0]->image;
+            if (Storage::exists($path_of_the_file)){
+                Storage::delete($path_of_the_file);
+            }
             $model->delete();
             $request->session()->flash('message',"Deleted Successfully");
             return redirect(url('admin/product'));
@@ -198,6 +270,29 @@ class ProductController extends Controller
     {
         $model= DB::table('product_attrs')->where(['id'=>$product_attr_id]);
         if ($model) {
+            $getModel = $model->get();
+            $path_of_the_file = "/public/".$this->destinationPathArr['product_attr_image']."/".$getModel[0]->attr_image;
+            if (Storage::exists($path_of_the_file)){
+                Storage::delete($path_of_the_file);
+            }
+            $model->delete();
+            $request->session()->flash('message',"Deleted Successfully");
+            return redirect(url('admin/product/manage_product/'.$product_id));
+        }else{
+            $request->session()->flash('error','Data Not Found !!!');
+            return redirect(url('admin/product/manage_product/'.$product_id));
+        }
+    }
+
+    public function removeProductImages(Request $request,$product_images_id,$product_id)
+    {
+        $model= DB::table('product_images')->where(['id'=>$product_images_id]);
+        if ($model) {
+            $getModel = $model->get();
+            $path_of_the_file = "/public/".$this->destinationPathArr['product_images']."/".$getModel[0]->images;
+            if (Storage::exists($path_of_the_file)){
+                Storage::delete($path_of_the_file);
+            }
             $model->delete();
             $request->session()->flash('message',"Deleted Successfully");
             return redirect(url('admin/product/manage_product/'.$product_id));
