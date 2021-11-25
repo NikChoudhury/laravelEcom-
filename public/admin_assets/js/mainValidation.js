@@ -1,3 +1,4 @@
+var isImageRequired;
 /***
  * Additional Validation Function For jquery,validate
  * ****/
@@ -164,6 +165,7 @@ $(function () {
 
     /* START Brand Manage Form */
     $("form[name='brand_manage_form']").validate({
+        ignore: [],
         rules: {
             brand_name: {
                 required: true,
@@ -183,6 +185,9 @@ $(function () {
             brand_name: {
                 required: "Please Insert Brand Name !!",
                 minlength: "Atleast 1 character required !!",
+            },
+            brand_logo: {
+                extension: "Please Select An Valid Image !!",
             },
             status: "Please Select Status !!!",
         },

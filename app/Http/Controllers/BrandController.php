@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Storage;
 class BrandController extends Controller
 {
     public function index()
@@ -68,10 +69,21 @@ class BrandController extends Controller
         $model->brand_description=$request->post('brand_description');
         $model->brand_website=$request->post('brand_website');
         # Upload File with a New name
-        if ($request->file('brand_logo')) {
-            $fileName = time().'-'.$request->brand_logo->getClientOriginalName();
-            $request->file('brand_logo')->storeAs('uploads/brand', $fileName, 'public');
-            $model->brand_logo = $fileName;
+        if ($request->hasfile('brand_logo')) {
+             // Check Image Is Already Exist Or Not And Delete
+            if ($request->post('id')>0){
+                $getModel = DB::table('brands')->where(['id'=>$request->post('id')])->get();
+                $path_of_the_file = "/public/uploads/brand/".$getModel[0]->brand_logo;
+                if (Storage::exists($path_of_the_file)){
+                    Storage::delete($path_of_the_file);
+                }
+            }
+            // ##################### //
+            $image = $request->file('brand_logo');
+            $ext = $image->getClientOriginalExtension();
+            $image_name = getSlug($request->post('brand_name')).'-logo'.'-'.time().'.'.$ext;
+            $image->storeAs('uploads/brand', $image_name,'public');
+            $model->brand_logo = $image_name;
         }
         $model->status=$request->post('status');
         // $model->brand_warranty_details=$request->post('brand_warranty_details');
@@ -89,6 +101,11 @@ class BrandController extends Controller
     {
         $model= Brand::where('status','!=','-1')->find($id);
         if ($model) {
+            $getModel = DB::table('brands')->where(['id'=>$id])->get();
+            $path_of_the_file = "/public/uploads/brand/".$getModel[0]->brand_logo;
+            if (Storage::exists($path_of_the_file)){
+                Storage::delete($path_of_the_file);
+            }
             $model->delete();
             $request->session()->flash('message',"Deleted Successfully");
             return redirect(url('admin/brand'));
