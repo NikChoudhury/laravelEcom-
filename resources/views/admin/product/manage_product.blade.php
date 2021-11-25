@@ -379,7 +379,7 @@
 <script src="{{asset('admin_assets/js/mainValidation.js')}}" defer></script>
 <!-- Image Requierd Validation -->
 <script>
-    let isImageRequired = {{ $id > '0' ? "false" : "true"}}
+    var isImageRequired = {{ $id > '0' ? "false" : "true"}}
 </script>
 <script>
     let loopCount = {{$loop_count-1}};

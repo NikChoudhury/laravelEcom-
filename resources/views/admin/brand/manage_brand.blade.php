@@ -5,7 +5,9 @@
     @section("title","Add Brand")
 @endif
 @section("brand_active","active")
-
+@push('style-lib')
+<link href="{{asset('admin_assets/vendor/lightbox2/dist/css/lightbox.css')}}" rel="stylesheet" media="all">
+@endpush
 @section('panel')
     <!-- BREADCRUMB-->
     <section class="au-breadcrumb m-t-75">
@@ -41,7 +43,7 @@
         <div class="section__content section__content--p30">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8 offset-md-2">
+                    <div class="col-md-10 offset-md-1">
                         <!-- Card Start -->
                         <div class="card">
                             <div class="card-body">
@@ -62,19 +64,50 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label for="brand_logo" class="control-label mb-1">Brand Logo</label>
-                                        <input id="brand_logo" name="brand_logo" type="file" class="form-control" aria-required="true" aria-invalid="false" value="{{old('brand_logo',$brand_logo)}}">
-                                        @if($errors->has('brand_logo'))
-                                            <p class="text-danger mt-2">{{ $errors->first('brand_logo') }}</p>
-                                        @endif
+                                        <!-- Row Start -->
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <label for="brand_description" class="control-label mb-1">Brand Description</label>
+                                                <textarea id="brand_description" name="brand_description" type="text" class="form-control" rows="5" aria-required="true" aria-invalid="false">{{old('brand_description',$brand_description)}}</textarea> 
+                                                @if($errors->has('brand_description'))
+                                                    <p class="text-danger mt-2">{{ $errors->first('brand_description') }}</p>
+                                                @endif
+
+                                                <label for="brand_staus" class="control-label mb-1">Status</label>
+                                                <select name="status" id="brand_staus" class="form-control mb-2">
+                                                    <option value="1" @if (old('status',$status) == "1") {{ 'selected' }} @endif >Active</option>
+                                                    <option value="0" @if (old('status',$status) == "0") {{ 'selected' }} @endif>Deactive</option>
+                                                </select>
+                                                @if($errors->has('status'))
+                                                    <p class="text-danger mt-2">{{ $errors->first('status') }}</p>
+                                                @endif
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="image-box-card">
+                                                    <div class="image-card-header card-image">
+                                                        @if($brand_logo =='')
+                                                        <img src="{{asset('admin_assets/images/icon/image-preview.png')}}" id="avatar-preview" class="img-preview ripple_animate" >
+                                                        @else
+                                                        <a href="{{asset('storage/uploads/brand/'.$brand_logo)}}" data-lightbox="{{$brand_logo}}" data-title="{{$brand_logo}}" class="image-link">
+                                                            <img src="{{asset('storage/uploads/brand/'.$brand_logo)}}" id="avatar-preview" class="img-preview ripple_animate" >
+                                                        </a>
+                                                        @endif
+                                                    </div>
+                                                    <div class="image-card-footer">
+                                                        <label for="select_brand_logo" class=""><i class="far fa-image"></i> Choose image</label>
+                                                        <input type="file" name="brand_logo" id="select_brand_logo" class="image-box-input">
+                                                    </div>
+                                                </div>
+                                                @if($errors->has('brand_logo'))
+                                                    <p class="text-danger mt-2">{{ $errors->first('brand_logo') }}</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <!-- Row END -->
+                                        
+                                       
                                     </div>
-                                    <div class="form-group">
-                                        <label for="brand_description" class="control-label mb-1">Brand Description</label>
-                                        <textarea id="brand_description" name="brand_description" type="text" class="form-control" rows="5" aria-required="true" aria-invalid="false">{{old('brand_description',$brand_description)}}</textarea> 
-                                        @if($errors->has('brand_description'))
-                                            <p class="text-danger mt-2">{{ $errors->first('brand_description') }}</p>
-                                        @endif
-                                    </div>
+                                   
                                     {{--
                                     <!-- 
                                     <div class="form-group">
@@ -93,16 +126,7 @@
                                     </div>
                                      -->
                                     --}}
-                                    <div class="form-group">
-                                        <label for="brand_staus" class="control-label mb-1">Status</label>
-                                        <select name="status" id="brand_staus" class="form-control">
-                                            <option value="1" @if (old('status',$status) == "1") {{ 'selected' }} @endif >Active</option>
-                                            <option value="0" @if (old('status',$status) == "0") {{ 'selected' }} @endif>Deactive</option>
-                                        </select>
-                                        @if($errors->has('status'))
-                                            <p class="text-danger mt-2">{{ $errors->first('status') }}</p>
-                                        @endif
-                                    </div>
+                                   
                                     <input type="hidden" name="id" value="{{$id}}">       
                                     <div>
                                         <button id="save-button" type="submit" class="btn btn-lg btn-info btn-block">
@@ -130,7 +154,8 @@
 
 @endsection
 @push('script-lib')
-<script src="{{asset('admin_assets/vendor/validateJs/jquery.validate.min.js')}}"></script>
-<script src="{{asset('admin_assets/vendor/validateJs/additional-methods.min.js')}}"></script>
+<script src="{{asset('admin_assets/vendor/validateJs/jquery.validate.min.js')}}" defer></script>
+<script src="{{asset('admin_assets/vendor/validateJs/additional-methods.min.js')}}" defer></script>
 <script src="{{asset('admin_assets/js/mainValidation.js')}}" defer></script>
+<script src="{{asset('admin_assets/vendor/lightbox2/dist/js/lightbox.js')}}" defer></script>
 @endpush
