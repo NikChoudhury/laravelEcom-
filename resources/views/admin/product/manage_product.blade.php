@@ -177,6 +177,52 @@
                                         @endif
                                     </div>
                                     <input type="hidden" name="id" value="{{$id}}">
+                                     <!-- Header Start -->
+                                     <div class="card mb-3">
+                                        <div class="card-header">
+                                            <h3>Product Images</h3>
+                                        </div>
+                                        <div class="card-body p-2">
+                                            <div class="gird-image-box" id="moreImageBox">
+                                                @php $loop_count_image = 0 @endphp
+                                                @foreach($productImagesData as $key=>$val)
+                                                @php $productImagesArray=(array)$val @endphp
+                                                <input type="hidden" name="product_images_id[]" value="{{$productImagesArray['id']}}">
+                                                <div class="image-box-card" id="imageCardBox_{{$loop_count_image}}">
+                                                    <div class="image-card-header card-image" >
+                                                        @if($productImagesArray['images'] =='')
+                                                        <img src="https://rkdfuniversity.org/assets/Assets/images/image-preview.png" id="avatar-preview_m_{{$loop_count_image}}" class="img-preview ripple_animate">
+                                                        @if($loop_count_image>'2')
+                                                        <button class="remove-image-btn" type="button" style="display: inline;" title="Remove">&#215;</button>
+                                                        @endif
+                                                        @else
+                                                        <a href="{{asset('storage/uploads/product/product-images/'.$productImagesArray['images'])}}"  data-lightbox="{{$productImagesArray['images']}}" data-title="{{$productImagesArray['images']}}" class="image-link">
+                                                            <img src="{{asset('storage/uploads/product/product-images/'.$productImagesArray['images'])}}" id="avatar-preview-{{$loop_count_image}}" class="img-preview ripple_animate">
+                                                        </a>
+                                                        <button class="remove-image-btn" type="button" style="display: inline;" title="Remove" onclick="openUrl('{{url('admin/product/remove_product_images')}}/{{$productImagesArray['id']}}/{{$id}}')">&#215;</button>
+                                                        @endif
+                                                    </div>
+                                                    <div class="image-card-footer">
+                                                        <label for="selectOtherImages_{{$loop_count_image}}" class=""><i class="far fa-image"></i> Choose image</label>
+                                                        <input type="file" name="images[]" id="selectOtherImages_{{$loop_count_image}}" class="image-box-input">
+                                                        @if($errors->has('images.'.$loop_count_image))
+                                                             <p class="text-danger mt-2">{{ $errors->first('images.'.$loop_count_image) }}</p>
+                                                        @endif
+                                                    </div>
+                                                   
+                                                </div>
+                                                @php $loop_count_image++ @endphp
+                                                @endforeach 
+                                                <div class="image-box-card" id="addMoreBtn">
+                                                    <div class="image-card-header add-more-btn" >
+                                                        <button class="btn btn-info form-control" type="button" onclick="addMoreImage()" title="Add More Images">Add More <i class="fa fa-plus" aria-hidden="true"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <!-- Header END -->
                                     <!-- Header Start -->
                                     <div class="card mb-1">
                                         <div class="card-header">
@@ -290,7 +336,6 @@
                                                         @if($loop_count<'1')
                                                         <button class="btn btn-info form-control" type="button" onclick="addMoreAttribute()">Add More</button>
                                                         @else
-                                                        <label for="">&nbsp</label>
                                                         <button class="btn btn-warning form-control" type="button" onclick="openUrl('{{url('admin/product/remove_product_attr')}}/{{$productAttrArray['id']}}/{{$id}}')">Remove</button>
                                                         @endif
                                                     </div>     
@@ -337,7 +382,8 @@
     let isImageRequired = {{ $id > '0' ? "false" : "true"}}
 </script>
 <script>
-    let loopCount = {{$loop_count-1}}
+    let loopCount = {{$loop_count-1}};
+    let loopCountForImg = {{$loop_count_image-1}};
 </script>
 <!-- Image Requierd Validation END-->
 @endpush

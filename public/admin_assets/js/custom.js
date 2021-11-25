@@ -54,6 +54,33 @@ function removeAttributeBtn(loopCount) {
 }
 
 /**
+ * Add More Image on manage Product page
+ */
+
+function addMoreImage() {
+    loopCountForImg++;
+    let html = '<div class="image-box-card" id="imageCardBox_' + loopCountForImg + '">';
+    html += '<input type="hidden" name="product_images_id[]" value="">';
+    html += '<div class="image-card-header card-image" >';
+    html += '<img src="https://rkdfuniversity.org/assets/Assets/images/image-preview.png" id="avatar-preview_m_' + loopCountForImg + '" class="img-preview ripple_animate" >';
+    html += '<button class="remove-image-btn" type="button" style="display: inline;" onclick="removeMoreImage(' + loopCountForImg + ')" title="Remove">&#215;</button>';
+    html += '</div>';
+    html += '<div class="image-card-footer">';
+    html += '<label for="selectOtherImages_' + loopCountForImg + '" class=""><i class="far fa-image"></i> Choose image</label>';
+    html += '<input type="file" name="images[]" id="selectOtherImages_' + loopCountForImg + '" class="image-box-input">';
+    html += '</div>';
+    html += '</div>';
+    $(html).insertBefore('#addMoreBtn');
+    // jQuery("#moreImageBox").append(html);
+}
+function removeMoreImage(loopCountForImg) {
+    $("#imageCardBox_" + loopCountForImg).fadeTo(500, 0.01, function () {
+        $(this).slideUp(250, function () {
+            $(this).remove();
+        });
+    });
+}
+/**
  * Preview Image Function
  */
 $(document).on('change', '.image-box-input', function (event) {

@@ -35,7 +35,6 @@ class ProductFormRequest extends FormRequest
             $image_validation = 'required|mimes:jpg,jpeg,png';
         }
         // End Image Validation Status
-        
         return [
             'category_id'=>'required',
             'name'=>"required|unique:products,name,{$this->post('id')}",
@@ -47,7 +46,8 @@ class ProductFormRequest extends FormRequest
             'mrp.*'=>['required','numeric','gt:0'],
             'price.*'=>['required','numeric','gt:0'],
             'qty.*'=>['required','integer','gte:0'],
-            'attr_image.*'=>['mimes:jpg,jpeg,png']
+            'attr_image.*'=>['mimes:jpg,jpeg,png'],
+            'images.*'=>['mimes:jpg,jpeg,png'],
         ];
     }
 
@@ -69,6 +69,8 @@ class ProductFormRequest extends FormRequest
             'qty.*.integer'=>'Please Insert valid Input',
             'qty.*.gte'=>'The Quantity must be greater than Or equal 0',
             'attr_image.*.mimes'=> "Please Select An Valid Image",  
+            'images.*.mimes'=> "Please Select An Valid Image",  
+
         ];
     }
 }

@@ -43,4 +43,6 @@
 21. php artisan migrate
     - For Creating Product_attrs table
 22. php artisan make:request ProductFormRequest
-    - For Creating Product Request 
+    - For Creating Product Request
+23. php artisan make:migration create_product_images_table
+    - For Making product_images table
