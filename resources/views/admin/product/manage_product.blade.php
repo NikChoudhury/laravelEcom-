@@ -376,6 +376,7 @@
 <script src="{{asset('admin_assets/vendor/validateJs/jquery.validate.js')}}"></script>
 <script src="{{asset('admin_assets/vendor/validateJs/additional-methods.min.js')}}"></script>
 <script src="{{asset('admin_assets/vendor/lightbox2/dist/js/lightbox.js')}}"></script>
+<script src="{{asset('admin_assets/vendor/ckeditor/ckeditor.js')}}" ></script>
 <script src="{{asset('admin_assets/js/mainValidation.js')}}" defer></script>
 <!-- Image Requierd Validation -->
 <script>
@@ -407,5 +408,13 @@
         toastr.warning("{{session('warning') }}");
     @endif
 </script>
+<!-- CK Editor -->
+<script>
+CKEDITOR.replace('short_desc');desc
+CKEDITOR.replace('desc');
+CKEDITOR.replace('technical_specification');
+CKEDITOR.replace('uses');
+</script>
+<!-- END CK Editor -->
 @endpush
 
