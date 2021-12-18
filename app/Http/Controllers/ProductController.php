@@ -53,6 +53,15 @@ class ProductController extends Controller
                 $data['technical_specification']=$model['0']->technical_specification;
                 $data['uses']=$model['0']->uses;
                 $data['warranty']=$model['0']->warranty;
+
+                $data['lead_time']=$model['0']->lead_time;
+                $data['tax']=$model['0']->tax;
+                $data['tax_type']=$model['0']->tax_type;
+                $data['is_promo']=$model['0']->is_promo;
+                $data['is_featured']=$model['0']->is_featured;
+                $data['is_discounted']=$model['0']->is_discounted;
+                $data['is_tranding']=$model['0']->is_tranding;
+
                 $data['status']=$model['0']->status;
             }else {
                 $request->session()->flash('error','Data Not Found !!!');
@@ -73,6 +82,16 @@ class ProductController extends Controller
             $data['technical_specification']="";
             $data['uses']="";
             $data['warranty']="";
+
+            $data['lead_time']="";
+            $data['tax']="";
+            $data['tax_type']="";
+            $data['is_promo']="";
+            $data['is_featured']="";
+            $data['is_discounted']="";
+            $data['is_tranding']="";
+            $data['warranty']="";
+
             $data['status']="";
 
             $data['productAttributeData'][0]['id']='';
@@ -165,6 +184,15 @@ class ProductController extends Controller
         $model->technical_specification=$request->post('technical_specification');
         $model->uses=$request->post('uses');
         $model->warranty=$request->post('warranty');
+
+        $model->lead_time=$request->post('lead_time');
+        $model->tax=$request->post('tax');
+        $model->tax_type=$request->post('tax_type');
+        $model->is_promo=$request->post('is_promo');
+        $model->is_featured=$request->post('is_featured');
+        $model->is_discounted=$request->post('is_discounted');
+        $model->is_tranding=$request->post('is_tranding');
+
         $model->status=$request->post('status');
 
         $isModelSaved = $model->save();

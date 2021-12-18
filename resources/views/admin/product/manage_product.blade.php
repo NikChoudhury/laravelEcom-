@@ -166,6 +166,82 @@
                                         @endif
                                     </div>
 
+                                    <div class="form-group ">
+                                        <label for="warranty">Warranty</label>
+                                        <textarea name="warranty" id="warranty" cols="30" rows="5" class="form-control">{{old('warranty',$warranty)}}</textarea>
+                                        @if($errors->has('warranty'))
+                                            <p class="text-danger mt-2">{{ $errors->first('warranty') }}</p>
+                                        @endif
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col col-md-4 col-12">
+                                            <label for="lead_time" class="control-label mt-2 mb-1">Lead Time</label>
+                                            <input type="text" name="lead_time" id="lead_time" class="form-control" value="{{old('lead_time',$lead_time)}}">
+                                            @if($errors->has('lead_time'))
+                                                <p class="text-danger mt-2">{{ $errors->first('lead_time') }}</p>
+                                            @endif
+                                        </div>
+                                        <div class="col col-md-4 col-12">
+                                            <label for="tax" class="control-label mt-2 mb-1">Tax</label>
+                                            <input type="text" name="tax" id="tax" class="form-control" value="{{old('tax',$tax)}}">
+                                            @if($errors->has('tax'))
+                                                <p class="text-danger mt-2">{{ $errors->first('tax') }}</p>
+                                            @endif
+                                        </div>
+                                        <div class="col col-md-4 col-12">
+                                            <label for="tax_type" class="control-label mt-2 mb-1">Tax Type</label>
+                                            <input type="text" name="tax_type" id="tax_type" class="form-control" value="{{old('tax_type',$tax_type)}}">
+                                            @if($errors->has('tax_type'))
+                                                <p class="text-danger mt-2">{{ $errors->first('tax_type') }}</p>
+                                            @endif
+                                        </div>
+                                        <div class="col col-md-3 col-12">
+                                            <label for="is_promo" class="control-label mt-2 mb-1">Is Promotional</label>
+                                            <select name="is_promo" id="is_promo" class="form-control">
+                                                <option value="0" @if (old('is_promo',$is_promo) == "0") {{ 'selected' }} @endif>No</option>
+                                                <option value="1" @if (old('is_promo',$is_promo) == "1") {{ 'selected' }} @endif >Yes</option>
+                                            </select>
+                                            @if($errors->has('is_promo'))
+                                                <p class="text-danger mt-2">{{ $errors->first('is_promo') }}</p>
+                                            @endif
+                                        </div>
+
+                                        <div class="col col-md-3 col-12">
+                                            <label for="is_featured" class="control-label mt-2 mb-1">Is Featured</label>
+                                            <select name="is_featured" id="is_featured" class="form-control">
+                                                <option value="0" @if (old('is_featured',$is_featured) == "0") {{ 'selected' }} @endif>No</option>
+                                                <option value="1" @if (old('is_featured',$is_featured) == "1") {{ 'selected' }} @endif >Yes</option>
+                                            </select>
+                                            @if($errors->has('is_featured'))
+                                                <p class="text-danger mt-2">{{ $errors->first('is_featured') }}</p>
+                                            @endif
+                                        </div>
+
+                                        <div class="col col-md-3 col-12">
+                                            <label for="is_discounted" class="control-label mt-2 mb-1">Is Discounted</label>
+                                            <select name="is_discounted" id="is_discounted" class="form-control">
+                                                <option value="0" @if (old('is_discounted',$is_discounted) == "0") {{ 'selected' }} @endif>No</option>
+                                                <option value="1" @if (old('is_discounted',$is_discounted) == "1") {{ 'selected' }} @endif >Yes</option>
+                                            </select>
+                                            @if($errors->has('is_discounted'))
+                                                <p class="text-danger mt-2">{{ $errors->first('is_discounted') }}</p>
+                                            @endif
+                                        </div>
+
+                                        <div class="col col-md-3 col-12">
+                                            <label for="is_tranding" class="control-label mt-2 mb-1">Is Tranding</label>
+                                            <select name="is_tranding" id="is_tranding" class="form-control">
+                                                <option value="0" @if (old('is_tranding',$is_tranding) == "0") {{ 'selected' }} @endif>No</option>
+                                                <option value="1" @if (old('is_tranding',$is_tranding) == "1") {{ 'selected' }} @endif >Yes</option>
+                                            </select>
+                                            @if($errors->has('is_tranding'))
+                                                <p class="text-danger mt-2">{{ $errors->first('is_tranding') }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <hr>
+
                                     <div class="form-group">
                                         <label for="brand_staus" class="control-label mb-1">Status</label>
                                         <select name="status" id="brand_staus" class="form-control">
@@ -414,6 +490,7 @@ CKEDITOR.replace('short_desc');desc
 CKEDITOR.replace('desc');
 CKEDITOR.replace('technical_specification');
 CKEDITOR.replace('uses');
+CKEDITOR.replace('warranty');
 </script>
 <!-- END CK Editor -->
 @endpush

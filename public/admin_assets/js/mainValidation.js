@@ -242,6 +242,30 @@ $(function () {
                 // required: true,
                 noSpace: true,
             },
+            lead_time: {
+                // required: true,
+                noSpace: true,
+            },
+            tax: {
+                // required: true,
+                noSpace: true,
+            },
+            tax_type: {
+                // required: true,
+                noSpace: true,
+            },
+            is_promo: {
+                required: true,
+            },
+            is_featured: {
+                required: true,
+            },
+            is_discounted: {
+                required: true,
+            },
+            is_tranding: {
+                required: true,
+            },
             status: {
                 required: true,
             },

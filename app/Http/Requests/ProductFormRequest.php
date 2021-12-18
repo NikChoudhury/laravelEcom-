@@ -39,6 +39,10 @@ class ProductFormRequest extends FormRequest
             'category_id'=>'required',
             'name'=>"required|unique:products,name,{$this->post('id')}",
             'image'=>$image_validation,
+            'is_promo'=>'required',
+            'is_featured'=>'required',
+            'is_discounted'=>'required',
+            'is_tranding'=>'required',
             'status'=>'required',
             
             // 'sku.*'=>['required',new isUniqueSku(['sku.*'])]
@@ -57,7 +61,7 @@ class ProductFormRequest extends FormRequest
             'category_id.required'=>'Please Select Category !!',
             'name.required'=>'Please Insert Product Name !!',
             'name.unique'=>'Name should be Unique!!',
-            'status.required'=>'Please Select Coupan Status !!',
+            'status.required'=>'Please Select Status !!',
             'sku.*.required'=>'Please Insert SKU',
             'mrp.*.required'=>'Please Insert MRP',
             'mrp.*.numeric'=>'Please Insert valid Input',

@@ -27,6 +27,16 @@ class CreateProductsTable extends Migration
             $table->longText("technical_specification")->nullable();
             $table->longText("uses")->nullable();
             $table->longText("warranty")->nullable();
+            $table->string("lead_time")->nullable()
+                    ->comment("When Product is Available?");
+            $table->string("tax")->nullable();
+            $table->string("tax_type")->nullable();
+            $table->string("is_promo")->nullable()
+                    ->comment("Product is Promotional or Not");
+            $table->string("is_featured")->nullable()
+                    ->comment("Product is Featured or Not");
+            $table->string("is_discounted")->nullable();
+            $table->string("is_tranding")->nullable();
             $table->integer("status")
                     ->default(0)
                     ->nullable()
