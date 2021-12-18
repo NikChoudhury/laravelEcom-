@@ -93,3 +93,16 @@ $(document).on('change', '.image-box-input', function (event) {
         alinkElm.prop("href", selectedImageUrl);
     }
 })
+
+//Add animation when input is focused
+$(".form-control").focus(function () {
+    $(this).parent().addClass("animation-color");
+});
+
+//Remove animation(s) when input is no longer focused
+$(".form-control").focusout(function () {
+    if ($(this).val() === "") {
+        $(this).parent().removeClass("animation-color");
+    }
+    $(this).parent().removeClass("animation-color");
+})

@@ -76,6 +76,13 @@ $(function () {
             value: {
                 required: true,
                 noSpace: true,
+                number: true,
+                min: .1,
+            },
+            min_order_amt: {
+                noSpace: true,
+                number: true,
+                min: 0,
             },
             status: {
                 required: true,

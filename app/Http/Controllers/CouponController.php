@@ -27,6 +27,10 @@ class CouponController extends Controller
                 $data['title']=$model['0']->title;
                 $data['code']=$model['0']->code;
                 $data['value']=$model['0']->value;
+                $data['type']=$model['0']->type;
+                $data['min_order_amt']=$model['0']->min_order_amt;
+                $data['is_one_time']=$model['0']->is_one_time;
+
                 $data['status']=$model['0']->status;
             }else {
                 $request->session()->flash('error','Data Not Found !!!');
@@ -38,6 +42,9 @@ class CouponController extends Controller
             $data['title']='';
             $data['code']='';
             $data['value']='';
+            $data['type']='';
+            $data['min_order_amt']='';
+            $data['is_one_time']='';
             $data['status']='';
         }
         return view('admin/coupon/manage_coupon',$data);
@@ -51,6 +58,9 @@ class CouponController extends Controller
             'title'=>'required',
             'code'=>'required|unique:coupons,code,'.$request->post('id'),
             'value'=>'required',
+            'type'=>'required',
+            'min_order_amt'=>'required',
+            'is_one_time'=>'required',
             'status'=>'required'
         ],
         [
@@ -58,6 +68,9 @@ class CouponController extends Controller
             'code.required'=>'Please Insert Coupon Code !!',
             'code.unique'=>'Coupon Code should be Unique!!',
             'value.required'=>'Please Insert Coupon Value !!',
+            'type.required'=>'Please Insert Coupon Type !!',
+            'min_order_amt.required'=>'Please Insert Coupon Min order Amount !!',
+            'is_one_time.required'=>'Please Select !!',
             'status.required'=>'Please Select Coupan Status !!'
         ]);
 
@@ -72,7 +85,11 @@ class CouponController extends Controller
         $model->title=$request->post('title');
         $model->code=$request->post('code');
         $model->value=$request->post('value');
+        $model->type=$request->post('type');
+        $model->min_order_amt=$request->post('min_order_amt');
+        $model->is_one_time=$request->post('is_one_time');
         $model->status=$request->post('status');
+        
         if ($model->save()) {
             $request->session()->flash('message',$msg);
             return redirect(url('admin/coupon'));
