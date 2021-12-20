@@ -31,6 +31,7 @@ $(function () {
     //  All admin Side Form Start
     /* START Category Manage Form */
     $("form[name='category_manage_form']").validate({
+        ignore: [],
         rules: {
             category_name: {
                 required: true,
@@ -41,6 +42,9 @@ $(function () {
                 required: true,
                 minlength: 2,
                 noSpace: true,
+            },
+            category_image: {
+                extension: "png|jpe?g|gif|jfif"
             },
             category_status: {
                 required: true,
@@ -56,6 +60,7 @@ $(function () {
                 minlength: "Atleast 2 character required !!",
             },
             category_status: "Please Select Category Status !!!",
+            category_image: "Please Select a vaild Image"
         },
     });
     /* END Category Manage Form */
@@ -123,7 +128,7 @@ $(function () {
                 minlength: "Atleast 1 character required !!",
             },
 
-            status: "Please Select Category Status !!!",
+            status: "Please Select Status !!!",
         },
     });
     /* END Size Manage Form */

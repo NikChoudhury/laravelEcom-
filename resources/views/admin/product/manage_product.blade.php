@@ -5,9 +5,6 @@
     @section("title","Add Product")
 @endif
 @section("product_active","active")
-@push('style-lib')
-<link href="{{asset('admin_assets/vendor/lightbox2/dist/css/lightbox.css')}}" rel="stylesheet" media="all">
-@endpush
 @section('panel')
     <!-- BREADCRUMB-->
     <section class="au-breadcrumb m-t-75">
@@ -451,7 +448,6 @@
 @push('script-lib')
 <script src="{{asset('admin_assets/vendor/validateJs/jquery.validate.js')}}"></script>
 <script src="{{asset('admin_assets/vendor/validateJs/additional-methods.min.js')}}"></script>
-<script src="{{asset('admin_assets/vendor/lightbox2/dist/js/lightbox.js')}}"></script>
 <script src="{{asset('admin_assets/vendor/ckeditor/ckeditor.js')}}" ></script>
 <script src="{{asset('admin_assets/js/mainValidation.js')}}" defer></script>
 <!-- Image Requierd Validation -->

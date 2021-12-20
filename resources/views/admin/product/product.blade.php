@@ -1,9 +1,6 @@
 @extends('admin.layouts.app')
 @section("title","Product")
 @section("product_active","active")
-@push('style-lib')
-<link href="{{asset('admin_assets/vendor/lightbox2/dist/css/lightbox.css')}}" rel="stylesheet" media="all">
-@endpush
 @section('panel')
     <!-- BREADCRUMB-->
     <section class="au-breadcrumb m-t-75">
@@ -86,9 +83,6 @@
     </section>
     <!-- END Size-->  
 @endsection
-@push('script-lib')
-<script src="{{asset('admin_assets/vendor/lightbox2/dist/js/lightbox.js')}}"></script>
-@endpush
 @push('script')
 <script>
     toastr.options =
