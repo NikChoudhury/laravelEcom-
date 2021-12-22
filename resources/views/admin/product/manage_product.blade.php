@@ -48,7 +48,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="p_name" class="control-label mb-1">Product Name*</label>
-                                        <input id="p_name" name="name" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('name',$name)}}" title="Product Name">
+                                        <input id="p_name" name="name" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('name',$name)}}">
                                         @if($errors->has('name'))
                                             <p class="text-danger mt-2">{{ $errors->first('name') }}</p>
                                         @endif
@@ -60,7 +60,7 @@
                                             <div class="row form-group">
                                                 <div class="col col-md-6 col-12">
                                                     <label for="category" class="control-label mb-1">Category*</label>
-                                                    <select name="category_id" id="category" class="form-control mb-2" title="Category">
+                                                    <select name="category_id" id="category" class="form-control mb-2">
                                                         <option value="">Select Category</option>
                                                         @foreach($categoryData as $list)
                                                         <option value="{{$list->id}}" @if(old('category_id',$category_id) == $list->id){{'selected'}}@endif>{{$list->category_name}}</option>
@@ -172,7 +172,7 @@
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col col-md-4 col-12">
+                                        <div class="col col-md-8 col-12">
                                             <label for="lead_time" class="control-label mt-2 mb-1">Lead Time</label>
                                             <input type="text" name="lead_time" id="lead_time" class="form-control" value="{{old('lead_time',$lead_time)}}">
                                             @if($errors->has('lead_time'))
@@ -180,19 +180,18 @@
                                             @endif
                                         </div>
                                         <div class="col col-md-4 col-12">
-                                            <label for="tax" class="control-label mt-2 mb-1">Tax</label>
-                                            <input type="text" name="tax" id="tax" class="form-control" value="{{old('tax',$tax)}}">
-                                            @if($errors->has('tax'))
-                                                <p class="text-danger mt-2">{{ $errors->first('tax') }}</p>
+                                            <label for="tax_id" class="control-label mt-2 mb-1">Tax</label>
+                                            <select name="tax_id" id="tax_id" class="form-control mb-2" title="Select Tax">
+                                                <option value="">Select Tax</option>
+                                                @foreach($taxData as $list)
+                                                <option value="{{$list->id}}" @if(old('tax_id',$tax_id) == $list->id){{'selected'}}@endif>{{$list->tax_desc}}</option>
+                                                @endforeach
+                                            </select>
+                                            @if($errors->has('tax_id'))
+                                                <p class="text-danger mt-2">{{ $errors->first('tax_id') }}</p>
                                             @endif
                                         </div>
-                                        <div class="col col-md-4 col-12">
-                                            <label for="tax_type" class="control-label mt-2 mb-1">Tax Type</label>
-                                            <input type="text" name="tax_type" id="tax_type" class="form-control" value="{{old('tax_type',$tax_type)}}">
-                                            @if($errors->has('tax_type'))
-                                                <p class="text-danger mt-2">{{ $errors->first('tax_type') }}</p>
-                                            @endif
-                                        </div>
+
                                         <div class="col col-md-3 col-12">
                                             <label for="is_promo" class="control-label mt-2 mb-1">Is Promotional</label>
                                             <select name="is_promo" id="is_promo" class="form-control">

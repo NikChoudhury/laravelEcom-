@@ -39,6 +39,7 @@ class ProductFormRequest extends FormRequest
             'category_id'=>'required',
             'name'=>"required|unique:products,name,{$this->post('id')}",
             'image'=>$image_validation,
+            'tax_id'=>'required',
             'is_promo'=>'required',
             'is_featured'=>'required',
             'is_discounted'=>'required',
@@ -74,6 +75,7 @@ class ProductFormRequest extends FormRequest
             'qty.*.gte'=>'The Quantity must be greater than Or equal 0',
             'attr_image.*.mimes'=> "Please Select An Valid Image",  
             'images.*.mimes'=> "Please Select An Valid Image",  
+            'tax_id.required'=>'Please Select Tax !!',
 
         ];
     }

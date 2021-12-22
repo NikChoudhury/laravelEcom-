@@ -46,3 +46,7 @@
     - For Creating Product Request
 23. php artisan make:migration create_product_images_table
     - For Making product_images table
+24. php artisan make:model Tax -mcr
+    - For Making Tax Model and controller and migration
+25. php artisan migrate
+    - For Creating Taxs table

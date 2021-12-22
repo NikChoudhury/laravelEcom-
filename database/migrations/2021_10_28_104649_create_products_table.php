@@ -29,8 +29,7 @@ class CreateProductsTable extends Migration
             $table->longText("warranty")->nullable();
             $table->string("lead_time")->nullable()
                     ->comment("When Product is Available?");
-            $table->string("tax")->nullable();
-            $table->string("tax_type")->nullable();
+            $table->integer("tax_id");
             $table->string("is_promo")->nullable()
                     ->comment("Product is Promotional or Not");
             $table->string("is_featured")->nullable()

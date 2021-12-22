@@ -41,6 +41,10 @@
                             <a href="{{url('admin/brand')}}">
                             <i class="fas fa-building"></i>Brand</a>
                         </li>
+                        <li class="@yield('tax_active')">
+                            <a href="{{url('admin/tax')}}">
+                            <i class="fa fa-inr" aria-hidden="true"></i>Tax</a>
+                        </li>
                         <li class="@yield('product_active')">
                             <a href="{{url('admin/product')}}">
                             <i class="fab fa-product-hunt"></i>Product</a>
