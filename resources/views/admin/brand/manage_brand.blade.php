@@ -5,9 +5,6 @@
     @section("title","Add Brand")
 @endif
 @section("brand_active","active")
-@push('style-lib')
-<link href="{{asset('admin_assets/vendor/lightbox2/dist/css/lightbox.css')}}" rel="stylesheet" media="all">
-@endpush
 @section('panel')
     <!-- BREADCRUMB-->
     <section class="au-breadcrumb m-t-75">
@@ -157,5 +154,4 @@
 <script src="{{asset('admin_assets/vendor/validateJs/jquery.validate.min.js')}}" defer></script>
 <script src="{{asset('admin_assets/vendor/validateJs/additional-methods.min.js')}}" defer></script>
 <script src="{{asset('admin_assets/js/mainValidation.js')}}" defer></script>
-<script src="{{asset('admin_assets/vendor/lightbox2/dist/js/lightbox.js')}}" defer></script>
 @endpush

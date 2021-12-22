@@ -5,9 +5,6 @@
     @section("title","Add Product")
 @endif
 @section("product_active","active")
-@push('style-lib')
-<link href="{{asset('admin_assets/vendor/lightbox2/dist/css/lightbox.css')}}" rel="stylesheet" media="all">
-@endpush
 @section('panel')
     <!-- BREADCRUMB-->
     <section class="au-breadcrumb m-t-75">
@@ -51,7 +48,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="p_name" class="control-label mb-1">Product Name*</label>
-                                        <input id="p_name" name="name" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('name',$name)}}" title="Product Name">
+                                        <input id="p_name" name="name" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{old('name',$name)}}">
                                         @if($errors->has('name'))
                                             <p class="text-danger mt-2">{{ $errors->first('name') }}</p>
                                         @endif
@@ -63,7 +60,7 @@
                                             <div class="row form-group">
                                                 <div class="col col-md-6 col-12">
                                                     <label for="category" class="control-label mb-1">Category*</label>
-                                                    <select name="category_id" id="category" class="form-control mb-2" title="Category">
+                                                    <select name="category_id" id="category" class="form-control mb-2">
                                                         <option value="">Select Category</option>
                                                         @foreach($categoryData as $list)
                                                         <option value="{{$list->id}}" @if(old('category_id',$category_id) == $list->id){{'selected'}}@endif>{{$list->category_name}}</option>
@@ -165,6 +162,81 @@
                                             <p class="text-danger mt-2">{{ $errors->first('uses') }}</p>
                                         @endif
                                     </div>
+
+                                    <div class="form-group ">
+                                        <label for="warranty">Warranty</label>
+                                        <textarea name="warranty" id="warranty" cols="30" rows="5" class="form-control">{{old('warranty',$warranty)}}</textarea>
+                                        @if($errors->has('warranty'))
+                                            <p class="text-danger mt-2">{{ $errors->first('warranty') }}</p>
+                                        @endif
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col col-md-8 col-12">
+                                            <label for="lead_time" class="control-label mt-2 mb-1">Lead Time</label>
+                                            <input type="text" name="lead_time" id="lead_time" class="form-control" value="{{old('lead_time',$lead_time)}}">
+                                            @if($errors->has('lead_time'))
+                                                <p class="text-danger mt-2">{{ $errors->first('lead_time') }}</p>
+                                            @endif
+                                        </div>
+                                        <div class="col col-md-4 col-12">
+                                            <label for="tax_id" class="control-label mt-2 mb-1">Tax</label>
+                                            <select name="tax_id" id="tax_id" class="form-control mb-2" title="Select Tax">
+                                                <option value="">Select Tax</option>
+                                                @foreach($taxData as $list)
+                                                <option value="{{$list->id}}" @if(old('tax_id',$tax_id) == $list->id){{'selected'}}@endif>{{$list->tax_desc}}</option>
+                                                @endforeach
+                                            </select>
+                                            @if($errors->has('tax_id'))
+                                                <p class="text-danger mt-2">{{ $errors->first('tax_id') }}</p>
+                                            @endif
+                                        </div>
+
+                                        <div class="col col-md-3 col-12">
+                                            <label for="is_promo" class="control-label mt-2 mb-1">Is Promotional</label>
+                                            <select name="is_promo" id="is_promo" class="form-control">
+                                                <option value="0" @if (old('is_promo',$is_promo) == "0") {{ 'selected' }} @endif>No</option>
+                                                <option value="1" @if (old('is_promo',$is_promo) == "1") {{ 'selected' }} @endif >Yes</option>
+                                            </select>
+                                            @if($errors->has('is_promo'))
+                                                <p class="text-danger mt-2">{{ $errors->first('is_promo') }}</p>
+                                            @endif
+                                        </div>
+
+                                        <div class="col col-md-3 col-12">
+                                            <label for="is_featured" class="control-label mt-2 mb-1">Is Featured</label>
+                                            <select name="is_featured" id="is_featured" class="form-control">
+                                                <option value="0" @if (old('is_featured',$is_featured) == "0") {{ 'selected' }} @endif>No</option>
+                                                <option value="1" @if (old('is_featured',$is_featured) == "1") {{ 'selected' }} @endif >Yes</option>
+                                            </select>
+                                            @if($errors->has('is_featured'))
+                                                <p class="text-danger mt-2">{{ $errors->first('is_featured') }}</p>
+                                            @endif
+                                        </div>
+
+                                        <div class="col col-md-3 col-12">
+                                            <label for="is_discounted" class="control-label mt-2 mb-1">Is Discounted</label>
+                                            <select name="is_discounted" id="is_discounted" class="form-control">
+                                                <option value="0" @if (old('is_discounted',$is_discounted) == "0") {{ 'selected' }} @endif>No</option>
+                                                <option value="1" @if (old('is_discounted',$is_discounted) == "1") {{ 'selected' }} @endif >Yes</option>
+                                            </select>
+                                            @if($errors->has('is_discounted'))
+                                                <p class="text-danger mt-2">{{ $errors->first('is_discounted') }}</p>
+                                            @endif
+                                        </div>
+
+                                        <div class="col col-md-3 col-12">
+                                            <label for="is_tranding" class="control-label mt-2 mb-1">Is Tranding</label>
+                                            <select name="is_tranding" id="is_tranding" class="form-control">
+                                                <option value="0" @if (old('is_tranding',$is_tranding) == "0") {{ 'selected' }} @endif>No</option>
+                                                <option value="1" @if (old('is_tranding',$is_tranding) == "1") {{ 'selected' }} @endif >Yes</option>
+                                            </select>
+                                            @if($errors->has('is_tranding'))
+                                                <p class="text-danger mt-2">{{ $errors->first('is_tranding') }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <hr>
 
                                     <div class="form-group">
                                         <label for="brand_staus" class="control-label mb-1">Status</label>
@@ -375,7 +447,7 @@
 @push('script-lib')
 <script src="{{asset('admin_assets/vendor/validateJs/jquery.validate.js')}}"></script>
 <script src="{{asset('admin_assets/vendor/validateJs/additional-methods.min.js')}}"></script>
-<script src="{{asset('admin_assets/vendor/lightbox2/dist/js/lightbox.js')}}"></script>
+<script src="{{asset('admin_assets/vendor/ckeditor/ckeditor.js')}}" ></script>
 <script src="{{asset('admin_assets/js/mainValidation.js')}}" defer></script>
 <!-- Image Requierd Validation -->
 <script>
@@ -407,5 +479,14 @@
         toastr.warning("{{session('warning') }}");
     @endif
 </script>
+<!-- CK Editor -->
+<script>
+CKEDITOR.replace('short_desc');desc
+CKEDITOR.replace('desc');
+CKEDITOR.replace('technical_specification');
+CKEDITOR.replace('uses');
+CKEDITOR.replace('warranty');
+</script>
+<!-- END CK Editor -->
 @endpush
 

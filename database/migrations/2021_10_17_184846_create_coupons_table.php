@@ -18,6 +18,11 @@ class CreateCouponsTable extends Migration
             $table->string('title');
             $table->string('code');
             $table->string('value');
+            $table->enum('type',['value','per'])
+                    ->comment("value=>'Value',per='Percentage'");
+            $table->float("min_order_amt")
+                    ->comment("Minimum Order Amount");
+            $table->integer("is_one_time");
             $table->enum('status',[-1,0,1])
                     ->default(0)
                     ->nullable()

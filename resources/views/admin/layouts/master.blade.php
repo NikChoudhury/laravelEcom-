@@ -19,6 +19,7 @@
     <link href="{{asset('admin_assets/vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
     <link href="{{asset('admin_assets/vendor/slick/slick.css')}}" rel="stylesheet" media="all">
     <link rel="stylesheet" href="{{asset('admin_assets/vendor/toastr/toastr.min.css')}}">
+    <link href="{{asset('admin_assets/vendor/lightbox2/dist/css/lightbox.css')}}" rel="stylesheet" media="all">
     @stack('style-lib')
     <!-- Main CSS-->
     <link href="{{asset('admin_assets/css/theme.css')}}" rel="stylesheet" media="all">
@@ -37,6 +38,7 @@
     <script src="{{asset('admin_assets/vendor/slick/slick.min.js')}}"></script>
     <script src="{{asset('admin_assets/vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
     <script src="{{asset('admin_assets/vendor/toastr/toastr.min.js')}}"></script>
+    <script src="{{asset('admin_assets/vendor/lightbox2/dist/js/lightbox.js')}}"></script>
     @stack('script-lib')
     
     <!-- Main JS-->

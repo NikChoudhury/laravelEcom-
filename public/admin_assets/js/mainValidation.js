@@ -31,6 +31,7 @@ $(function () {
     //  All admin Side Form Start
     /* START Category Manage Form */
     $("form[name='category_manage_form']").validate({
+        ignore: [],
         rules: {
             category_name: {
                 required: true,
@@ -41,6 +42,9 @@ $(function () {
                 required: true,
                 minlength: 2,
                 noSpace: true,
+            },
+            category_image: {
+                extension: "png|jpe?g|gif|jfif"
             },
             category_status: {
                 required: true,
@@ -56,12 +60,14 @@ $(function () {
                 minlength: "Atleast 2 character required !!",
             },
             category_status: "Please Select Category Status !!!",
+            category_image: "Please Select a vaild Image"
         },
     });
     /* END Category Manage Form */
 
     /* START Coupon Manage Form */
     $("form[name='coupon_manage_form']").validate({
+        ignore: [],
         rules: {
             title: {
                 required: true,
@@ -76,6 +82,13 @@ $(function () {
             value: {
                 required: true,
                 noSpace: true,
+                number: true,
+                min: .1,
+            },
+            min_order_amt: {
+                noSpace: true,
+                number: true,
+                min: 0,
             },
             status: {
                 required: true,
@@ -100,6 +113,7 @@ $(function () {
 
     /* START Size Manage Form */
     $("form[name='size_manage_form']").validate({
+        ignore: [],
         rules: {
             size: {
                 required: true,
@@ -116,13 +130,14 @@ $(function () {
                 minlength: "Atleast 1 character required !!",
             },
 
-            status: "Please Select Category Status !!!",
+            status: "Please Select Status !!!",
         },
     });
     /* END Size Manage Form */
 
     /* START Color Manage Form */
     $("form[name='color_manage_form']").validate({
+        ignore: [],
         rules: {
             color_code: {
                 required: true,
@@ -194,6 +209,32 @@ $(function () {
     });
     /* END Brand Manage Form */
 
+    /* START Tax Manage Form */
+    $("form[name='tax_manage_form']").validate({
+        ignore: [],
+        rules: {
+            tax_value: {
+                required: true,
+                minlength: 1,
+                noSpace: true,
+            },
+            tax_desc: {
+                noSpace: true,
+            },
+            status: {
+                required: true,
+            },
+        },
+        messages: {
+            tax_value: {
+                required: "Please Insert Tax Value !!",
+                minlength: "Atleast 1 character required !!",
+            },
+            status: "Please Select Status !!!",
+        },
+    });
+    /* END Tax Manage Form */
+
     /* START Product Manage Form */
     $("form[name='admin_product_manage_form']").validate({
         ignore: [],
@@ -242,6 +283,26 @@ $(function () {
                 // required: true,
                 noSpace: true,
             },
+            lead_time: {
+                // required: true,
+                noSpace: true,
+            },
+            tax_id: {
+                required: true,
+                noSpace: true,
+            },
+            is_promo: {
+                required: true,
+            },
+            is_featured: {
+                required: true,
+            },
+            is_discounted: {
+                required: true,
+            },
+            is_tranding: {
+                required: true,
+            },
             status: {
                 required: true,
             },
@@ -269,6 +330,9 @@ $(function () {
             },
             'attr_image[]': {
                 extension: "png|jpe?g|gif",
+            },
+            'images[]': {
+                extension: "png|jpe?g|gif|jfif",
             }
         },
         messages: {
@@ -281,6 +345,9 @@ $(function () {
             image: {
                 required: "Please Select An Image !!",
                 extension: "Please Select An Valid Image !!",
+            },
+            tax_id: {
+                required: "Please Select Tax !!",
             },
             'sku[]': {
                 required: "Please Insert SKU !!",
@@ -295,6 +362,9 @@ $(function () {
                 required: "Please Insert Quantity !!",
             },
             'attr_image[]': {
+                extension: "Please Select An Valid Image !!",
+            },
+            'images[]': {
                 extension: "Please Select An Valid Image !!",
             },
             status: "Please Select Status !!!",

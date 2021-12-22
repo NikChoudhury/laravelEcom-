@@ -53,6 +53,14 @@ class ProductController extends Controller
                 $data['technical_specification']=$model['0']->technical_specification;
                 $data['uses']=$model['0']->uses;
                 $data['warranty']=$model['0']->warranty;
+
+                $data['lead_time']=$model['0']->lead_time;
+                $data['tax_id']=$model['0']->tax_id;
+                $data['is_promo']=$model['0']->is_promo;
+                $data['is_featured']=$model['0']->is_featured;
+                $data['is_discounted']=$model['0']->is_discounted;
+                $data['is_tranding']=$model['0']->is_tranding;
+
                 $data['status']=$model['0']->status;
             }else {
                 $request->session()->flash('error','Data Not Found !!!');
@@ -73,6 +81,15 @@ class ProductController extends Controller
             $data['technical_specification']="";
             $data['uses']="";
             $data['warranty']="";
+
+            $data['lead_time']="";
+            $data['tax_id']="";
+            $data['is_promo']="";
+            $data['is_featured']="";
+            $data['is_discounted']="";
+            $data['is_tranding']="";
+            $data['warranty']="";
+
             $data['status']="";
 
             $data['productAttributeData'][0]['id']='';
@@ -98,6 +115,8 @@ class ProductController extends Controller
         $data['sizeData']=DB::table('sizes')->where(['status'=>'1'])->get();
         // Get Color Table Data
         $data['colorData']=DB::table('colors')->where(['status'=>'1'])->get();
+        // Get Tax Table Data
+        $data['taxData']=DB::table('taxes')->where(['status'=>'1'])->get();
         
         return view('admin/product/manage_product',$data);
     }
@@ -165,6 +184,14 @@ class ProductController extends Controller
         $model->technical_specification=$request->post('technical_specification');
         $model->uses=$request->post('uses');
         $model->warranty=$request->post('warranty');
+
+        $model->lead_time=$request->post('lead_time');
+        $model->tax_id=$request->post('tax_id');
+        $model->is_promo=$request->post('is_promo');
+        $model->is_featured=$request->post('is_featured');
+        $model->is_discounted=$request->post('is_discounted');
+        $model->is_tranding=$request->post('is_tranding');
+
         $model->status=$request->post('status');
 
         $isModelSaved = $model->save();

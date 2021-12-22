@@ -7,6 +7,7 @@ Use App\Http\Controllers\CouponController;
 Use App\Http\Controllers\SizeController;
 Use App\Http\Controllers\ColorController;
 Use App\Http\Controllers\BrandController;
+Use App\Http\Controllers\TaxController;
 Use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
@@ -60,6 +61,14 @@ Route::middleware(['admin_auth'])->group(function () {
     Route::get('admin/brand/remove/{id}', [BrandController::class,'removeBrand']);
     Route::get('admin/brand/status/{status}/{id}', [BrandController::class,'changeStatus']);
     // END Brand
+    // Tax
+    Route::get('admin/tax', [TaxController::class,'index']);
+    Route::get('admin/tax/manage_tax', [TaxController::class,'manageTax']);
+    Route::get('admin/tax/manage_tax/{id}', [TaxController::class,'manageTax']);
+    Route::post('admin/tax/manage_tax_process', [TaxController::class,'manageTaxProcess'])->name('tax.manage_tax_process');
+    Route::get('admin/tax/remove/{id}', [TaxController::class,'removeTax']);
+    Route::get('admin/tax/status/{status}/{id}', [TaxController::class,'changeStatus']);
+    // END Tax
     // Product
     Route::get('admin/product', [ProductController::class,'index']);
     Route::get('admin/product/manage_product', [ProductController::class,'manageProduct']);
