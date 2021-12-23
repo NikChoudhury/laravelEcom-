@@ -17,6 +17,7 @@ Route::get('/', function () {
 # Admin Route
 Route::get('admin', [AdminController::class,'index']);
 Route::post('admin/auth', [AdminController::class,'auth'])->name('admin.auth');
+// Route::get('admin/getHashPass', [AdminController::class,'getHashPassword']);
 ## Admin Route Middleware
 Route::middleware(['admin_auth'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class,'dashboard']);

@@ -30,12 +30,12 @@ class CreateProductsTable extends Migration
             $table->string("lead_time")->nullable()
                     ->comment("When Product is Available?");
             $table->integer("tax_id");
-            $table->string("is_promo")->nullable()
+            $table->integer("is_promo")->nullable()
                     ->comment("Product is Promotional or Not");
-            $table->string("is_featured")->nullable()
+            $table->integer("is_featured")->nullable()
                     ->comment("Product is Featured or Not");
-            $table->string("is_discounted")->nullable();
-            $table->string("is_tranding")->nullable();
+            $table->integer("is_discounted")->nullable();
+            $table->integer("is_tranding")->nullable();
             $table->integer("status")
                     ->default(0)
                     ->nullable()
