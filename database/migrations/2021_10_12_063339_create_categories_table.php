@@ -17,6 +17,8 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('category_name');
             $table->string('category_slug');
+            $table->string('category_image')->nullable();
+            $table->integer('parent_category_id')->nullable();
             $table->enum('status',[-1,0,1])
                     ->default(0)
                     ->nullable()

@@ -219,6 +219,7 @@ $(function () {
                 noSpace: true,
             },
             tax_desc: {
+                required: true,
                 noSpace: true,
             },
             status: {

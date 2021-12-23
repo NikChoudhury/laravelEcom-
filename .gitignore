@@ -13,3 +13,7 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/resources/views/admin/test
+/app/Http/Controllers/TestController.php
+/database/migrations/2021_12_23_164652_create_tests_table.php
+/app/Models/Test.php

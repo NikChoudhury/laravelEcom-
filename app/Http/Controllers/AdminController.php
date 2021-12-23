@@ -65,10 +65,10 @@ class AdminController extends Controller
         return redirect('admin');
     }
 
-    // public function updatePassword()
+    // public function getHashPassword()
     // {
     //     $result=Admin::find(1);
-    //     $result->password=Hash::make("CN5852724807#");
+    //     $result->password=Hash::make("Nc7002593587#");
     //     $result->save();
     // }
 }

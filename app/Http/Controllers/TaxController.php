@@ -40,11 +40,13 @@ class TaxController extends Controller
     {
         $request->validate([
             'tax_value'=>'required|unique:taxes,tax_value,'.$request->post('id'),
-            'status'=>'required'
+            'tax_desc'=>'required',
+            'status'=>'required',
         ],
         [
-            'tax_value.required'=>'Please Insert Tax Value  !!',
+            'tax_value.required'=>'Please Insert Tax Value !!',
             'tax_value.unique'=>'Tax Value should be Unique!!',
+            'tax_desc.required'=>'Please Insert Tax Decription !!',
             'status.required'=>'Please Select Coupan Status !!'
         ]);
 
