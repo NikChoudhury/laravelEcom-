@@ -9,6 +9,7 @@ Use App\Http\Controllers\ColorController;
 Use App\Http\Controllers\BrandController;
 Use App\Http\Controllers\TaxController;
 Use App\Http\Controllers\ProductController;
+Use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -80,4 +81,9 @@ Route::middleware(['admin_auth'])->group(function () {
     Route::get('admin/product/remove_product_images/{product_images_id}/{product_id}', [ProductController::class,'removeProductImages']);
     Route::get('admin/product/status/{status}/{id}', [ProductController::class,'changeStatus']);
     // END Product
+     // Customer
+     Route::get('admin/customer', [CustomerController::class,'index']);
+     Route::get('admin/customer/status/{status}/{id}', [CustomerController::class,'changeStatus']);
+     Route::get('admin/customer/show/{id}', [CustomerController::class,'show']);
+     // END Customer
 });

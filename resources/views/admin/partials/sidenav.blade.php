@@ -49,6 +49,10 @@
                             <a href="{{url('admin/product')}}">
                             <i class="fab fa-product-hunt"></i>Product</a>
                         </li>
+                        <li class="@yield('customer_active')">
+                            <a href="{{url('admin/customer')}}">
+                            <i class="fa fa-users" aria-hidden="true"></i>Customer</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
