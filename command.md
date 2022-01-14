@@ -50,3 +50,7 @@
     - For Making Tax Model and controller and migration
 25. php artisan migrate
     - For Creating Taxs table
+26. php artisan make:model Customer -mcr
+    - For Making Customer Model and controller and migration
+27. php artisan migrate
+    - For Creating Customer table
