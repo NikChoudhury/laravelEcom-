@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
+use App\Http\Controllers\Controller;
+use App\Models\Admin\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Storage;
@@ -30,6 +31,7 @@ class AdminCategoryController extends Controller
                 $data['parent_category_id']=$model['0']->parent_category_id;
                 $data['category_image']=$model['0']->category_image;
                 $data['category_status']=$model['0']->status;
+                $data['is_home']=$model['0']->is_home;
             }else {
                 $request->session()->flash('error','Data Not Found !!!');
                 return redirect(url('admin/category'));
@@ -42,6 +44,7 @@ class AdminCategoryController extends Controller
             $data['parent_category_id']='';
             $data['category_image']='';
             $data['category_status']='';
+            $data['is_home']='';
         }
         // Get Category Table Data
         $data['categoryData']=DB::table('categories')->where(['status'=>'1'])->where('id','!=',$id)->get();
@@ -94,6 +97,10 @@ class AdminCategoryController extends Controller
         $model->category_slug=getSlug($request->post('category_slug'));
         $model->parent_category_id=$request->post('parent_category_id');
         $model->status=$request->post('category_status');
+        $model->is_home= 0;
+        if ($request->post('is_home')!==null) {
+            $model->is_home= 1;
+        }
         if ($model->save()) {
             $request->session()->flash('message',$msg);
             return redirect(url('admin/category'));

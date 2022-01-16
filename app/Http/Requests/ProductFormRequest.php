@@ -5,9 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\Admin\Product;
 use Illuminate\Support\Facades\DB;
-use App\Rules\isUniqueSku;
 
 class ProductFormRequest extends FormRequest
 {

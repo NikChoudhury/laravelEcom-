@@ -64,20 +64,29 @@
                                         <!-- Row Start -->
                                         <div class="row">
                                             <div class="col-md-8">
-                                                <label for="brand_description" class="control-label mb-1">Brand Description</label>
-                                                <textarea id="brand_description" name="brand_description" type="text" class="form-control" rows="5" aria-required="true" aria-invalid="false">{{old('brand_description',$brand_description)}}</textarea> 
-                                                @if($errors->has('brand_description'))
-                                                    <p class="text-danger mt-2">{{ $errors->first('brand_description') }}</p>
-                                                @endif
+                                                <div class="form-group">
+                                                    <label for="brand_description" class="control-label mb-1">Brand Description</label>
+                                                    <textarea id="brand_description" name="brand_description" type="text" class="form-control" rows="5" aria-required="true" aria-invalid="false">{{old('brand_description',$brand_description)}}</textarea> 
+                                                    @if($errors->has('brand_description'))
+                                                        <p class="text-danger mt-2">{{ $errors->first('brand_description') }}</p>
+                                                    @endif
+                                                </div>    
 
-                                                <label for="brand_staus" class="control-label mb-1">Status</label>
-                                                <select name="status" id="brand_staus" class="form-control mb-2">
-                                                    <option value="1" @if (old('status',$status) == "1") {{ 'selected' }} @endif >Active</option>
-                                                    <option value="0" @if (old('status',$status) == "0") {{ 'selected' }} @endif>Deactive</option>
-                                                </select>
-                                                @if($errors->has('status'))
-                                                    <p class="text-danger mt-2">{{ $errors->first('status') }}</p>
-                                                @endif
+                                                
+                                                <div class="form-group">
+                                                    <label for="brand_staus" class="control-label mb-1">Status</label>
+                                                    <select name="status" id="brand_staus" class="form-control mb-2">
+                                                        <option value="1" @if (old('status',$status) == "1") {{ 'selected' }} @endif >Active</option>
+                                                        <option value="0" @if (old('status',$status) == "0") {{ 'selected' }} @endif>Deactive</option>
+                                                    </select>
+                                                    @if($errors->has('status'))
+                                                        <p class="text-danger mt-2">{{ $errors->first('status') }}</p>
+                                                    @endif
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="is_home" class="control-label mb-1">Show In Home Page</label>
+                                                    <input type="checkbox" name="is_home" id="is_home" @if($is_home == "1") {{'checked'}} @endif>
+                                                </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="image-box-card">

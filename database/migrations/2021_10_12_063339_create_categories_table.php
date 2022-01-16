@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('category_slug');
             $table->string('category_image')->nullable();
             $table->integer('parent_category_id')->nullable();
+            $table->integer('is_home');
             $table->enum('status',[-1,0,1])
                     ->default(0)
                     ->nullable()

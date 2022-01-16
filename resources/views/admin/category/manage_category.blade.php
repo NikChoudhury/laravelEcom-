@@ -84,6 +84,10 @@
                                                     <p class="text-danger mt-2">{{ $errors->first('category_status') }}</p>
                                                 @endif
                                             </div>
+                                            <div class="form-group">
+                                                <label for="is_home" class="control-label mb-1">Show In Home Page</label>
+                                                <input type="checkbox" name="is_home" id="is_home" @if($is_home == "1") {{'checked'}} @endif>
+                                            </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>Image</label>

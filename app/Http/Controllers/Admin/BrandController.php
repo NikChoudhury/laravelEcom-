@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Models\Brand;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Admin\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Storage;
@@ -24,6 +26,7 @@ class BrandController extends Controller
                 $data['brand_website']=$model['0']->brand_website;
                 $data['brand_logo']=$model['0']->brand_logo;
                 $data['status']=$model['0']->status;
+                $data['is_home']=$model['0']->is_home;
                 // $data['brand_warranty_details']=$model['0']->brand_warranty_details;
                 // $data['brand_contact_info']=$model['0']->brand_contact_info;
             }else {
@@ -38,6 +41,7 @@ class BrandController extends Controller
             $data['brand_website']='';
             $data['brand_logo']='';
             $data['status']='';
+            $data['is_home']='';
             // $data['brand_warranty_details']='';
             // $data['brand_contact_info']='';
         }
@@ -86,6 +90,10 @@ class BrandController extends Controller
             $model->brand_logo = $image_name;
         }
         $model->status=$request->post('status');
+        $model->is_home = 0;
+        if ($request->post('is_home')!==null) {
+            $model->is_home = 1;
+        }
         // $model->brand_warranty_details=$request->post('brand_warranty_details');
         // $model->brand_contact_info=$request->post('brand_contact_info');
         if ($model->save()) {
