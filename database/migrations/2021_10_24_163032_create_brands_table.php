@@ -21,6 +21,7 @@ class CreateBrandsTable extends Migration
             $table->longText('brand_contact_info')->nullable();
             $table->string("brand_website")->nullable();
             $table->string("brand_logo")->nullable();
+            $table->integer('is_home');
             $table->enum('status',[-1,0,1])
                     ->default(0)
                     ->nullable()

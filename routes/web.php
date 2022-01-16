@@ -1,15 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-Use App\Http\Controllers\AdminController;
-Use App\Http\Controllers\AdminCategoryController;
-Use App\Http\Controllers\CouponController;
-Use App\Http\Controllers\SizeController;
-Use App\Http\Controllers\ColorController;
-Use App\Http\Controllers\BrandController;
-Use App\Http\Controllers\TaxController;
-Use App\Http\Controllers\ProductController;
-Use App\Http\Controllers\CustomerController;
+Use App\Http\Controllers\Admin\AdminController;
+Use App\Http\Controllers\Admin\AdminCategoryController;
+Use App\Http\Controllers\Admin\CouponController;
+Use App\Http\Controllers\Admin\SizeController;
+Use App\Http\Controllers\Admin\ColorController;
+Use App\Http\Controllers\Admin\BrandController;
+Use App\Http\Controllers\Admin\TaxController;
+Use App\Http\Controllers\Admin\ProductController;
+Use App\Http\Controllers\Admin\CustomerController;
 
 Route::get('/', function () {
     return view('welcome');
